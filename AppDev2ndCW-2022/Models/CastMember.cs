@@ -5,10 +5,7 @@ namespace AppDev2ndCW_2022.Models
 {
     public class CastMember
     {
-        [Key, Column(Order = 1)]
         public long DvdNumber { get; set; } 
-
-        [Key, Column(Order = 2)]
         public long ActorNumber { get; set; }
 
         [ForeignKey("DvdNumber")]

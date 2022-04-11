@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AppDev2ndCW_2022.Models
 {
@@ -11,6 +12,9 @@ namespace AppDev2ndCW_2022.Models
         public string MemberFirstName { get; set; }
         public string MemberAddress { get; set; }
         public DateTime MemberDOB { get; set; }
+        
+        [ForeignKey("MembershipCategoryNumber")]
+        public MembershipCategory MembershipCategory { get; set; }
 
     }
 }

@@ -27,21 +27,71 @@ namespace AppDev2ndCW_2022
 
             });
 
-            /*  services.AddDbContext<DataBaseContext>(options =>
-              {
-                  var connectionString = Configuration.GetConnectionString("DataBaseContext");
-                  options.UseSqlServer(connectionString);
-              });*/
+ 
 
             services.AddMvc();
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddRazorPages();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
+            /*  services.AddDbContext<DataBaseContext>(options =>
+              {
+                  var connectionString = Configuration.GetConnectionString("DataBaseContext");
+                  options.UseSqlServer(connectionString);
+              });*/
+
         }
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+            //var builder = WebApplication.CreateBuilder(args);
+
+            // Add services to the container.
+            //builder.Services.AddControllersWithViews();
+
+            //var app = builder.Build();
+
+            // Configure the HTTP request pipeline.
+            //if (!app.Environment.IsDevelopment())
+            //{
+                //app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                //app.UseHsts();
+            //}
+
+            if (env.IsDevelopment())
+            {
+                /* app.UseExceptionHandler("/error.html");*/
+                app.UseDeveloperExceptionPage();
+
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            var builder = WebApplication.CreateBuilder();
+
+            // Add services to the container.
+            builder.Services.AddControllersWithViews();
+
+            var apps = builder.Build();
+
+            //app.MapControllerRoute(
+            //name: "default",
+            //pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            //app.Run();
+
         }
-    }
+    }   
 }

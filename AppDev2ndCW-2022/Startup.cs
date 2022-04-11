@@ -41,7 +41,7 @@ namespace AppDev2ndCW_2022
               });*/
 
         }
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
             //var builder = WebApplication.CreateBuilder(args);
@@ -84,13 +84,21 @@ namespace AppDev2ndCW_2022
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            var apps = builder.Build();
+            //var apps = builder.Build();
 
             //app.MapControllerRoute(
             //name: "default",
             //pattern: "{controller=Home}/{action=Index}/{id?}");
 
             //app.Run();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
+
 
         }
     }   

@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using AppDev2ndCW_2022.Models;
+using AppDev2ndCW.Models;
 
 namespace AppDev2ndCW_2022
 {
@@ -84,7 +86,13 @@ namespace AppDev2ndCW_2022
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            //var apps = builder.Build();
+            var built = builder.Build();
+            using (var scope = built.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+
+                SeedData.Initialize(services);
+            }
 
             //app.MapControllerRoute(
             //name: "default",

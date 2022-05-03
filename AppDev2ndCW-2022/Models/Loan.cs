@@ -16,12 +16,12 @@ namespace AppDev2ndCW_2022.Models
         public DateTime DateReturned { get; set; }
         
         [ForeignKey("LoanTypeNumber")]
-        public LoanTypes LoanType { get; set; }
+        public LoanTypes? LoanType { get; set; }
         
         [ForeignKey("CopyNumber")]
-        public DvdCopy DvdCopy { get; set; }
+        public DvdCopy? DvdCopy { get; set; }
 
         [ForeignKey("MemberNumber")]
-        public Member Member { get; set; }
+        public Member? Member { get; set; }
     }
 }

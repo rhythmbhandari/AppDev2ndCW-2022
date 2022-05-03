@@ -6,7 +6,7 @@ namespace AppDev2ndCW_2022.Models
     {
         [Key]
         public long MembershipCategoryNumber { get; set; }
-        public string MembershipCategoryDescription { get; set; }
-        public string MembershipCategoryTotalLoans { get; set; }
+        public string? MembershipCategoryDescription { get; set; }
+        public string? MembershipCategoryTotalLoans { get; set; }
     }
 }

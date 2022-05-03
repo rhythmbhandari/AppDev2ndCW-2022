@@ -8,10 +8,10 @@ namespace AppDev2ndCW_2022.Models
         public long CategoryNumber { get; set; }
 
         [Required]
-        public string CategoryDescription { get; set; }
+        public string? CategoryDescription { get; set; }
 
         [Required]
-        public string AgeRestricted { get; set; }
+        public string? AgeRestricted { get; set; }
 
     }
 }

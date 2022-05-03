@@ -6,6 +6,6 @@ namespace AppDev2ndCW_2022.Models
     {
         [Key]
         public long ProducerNumber { get; set; }
-        public string ProducerName { get; set; }
+        public string? ProducerName { get; set; }
     }
 }

@@ -16,13 +16,13 @@ namespace AppDev2ndCW_2022.Models
         public int PenaltyCharge { get; set; }
 
         [ForeignKey("ProducerNumber")]
-        public Producer Producer { get; set; }
+        public Producer? Producer { get; set; }
         
         [ForeignKey("CategoryNumber")]
-        public DvdCategory DvdCategory { get; set; }
+        public DvdCategory? DvdCategory { get; set; }
         
         [ForeignKey("StudioNumber")]
-        public Studio Studio { get; set; }
+        public Studio? Studio { get; set; }
 
 
     }

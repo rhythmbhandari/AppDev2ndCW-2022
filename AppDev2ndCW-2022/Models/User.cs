@@ -6,8 +6,8 @@ namespace AppDev2ndCW_2022.Models
     {
         [Key]
         public long UserNumber { get; set; }
-        public string UserType { get; set; }
-        public string UserPassword { get; set; }
+        public string? UserType { get; set; }
+        public string? UserPassword { get; set; }
 
     }
 }

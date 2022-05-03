@@ -33,6 +33,7 @@ namespace AppDev2ndCW.Models
             : base(options)
         {
             Database.EnsureCreated();
+
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

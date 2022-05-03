@@ -9,9 +9,9 @@ namespace AppDev2ndCW_2022.Models
         public long ActorNumber { get; set; }
 
         [ForeignKey("DvdNumber")]
-        public DvdTitle DvdTitle { get; set; }
+        public DvdTitle? DvdTitle { get; set; }
 
         [ForeignKey("ActorNumber")]
-        public Actor Actor { get; set; }
+        public Actor? Actor { get; set; }
     }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AppDev2ndCW_2022.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace AppDev2ndCW_2022.Models

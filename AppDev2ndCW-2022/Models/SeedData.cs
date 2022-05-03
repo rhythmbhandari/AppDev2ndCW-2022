@@ -1,5 +1,9 @@
 using AppDev2ndCW_2022.Models;
 using Microsoft.EntityFrameworkCore;
+<<<<<<< HEAD
+=======
+using AppDev2ndCW_2022.Models;
+>>>>>>> development
 
 namespace AppDev2ndCW_2022.Models
 {

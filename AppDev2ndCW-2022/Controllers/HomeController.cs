@@ -16,12 +16,20 @@ namespace AppDev2ndCW_2022.Controllers
             dataBaseContext = db;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(String actor, String radio)
+        {
+            ViewData["PieceOfShit"] = "Simon";
+            ViewBag.name = actor + radio;
+            return View();
+        }
+
+
+        public IActionResult Privacy()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult SearchResult()
         {
             return View();
         }

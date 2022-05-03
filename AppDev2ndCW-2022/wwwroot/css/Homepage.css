@@ -1,0 +1,19 @@
+.task__radio-btn {
+    display: none;
+}
+
+.task__radio-btn + .task > svg {
+    display: none;
+}
+
+.task__radio-btn:checked + .task > svg {
+    display: block;
+}
+
+.task__radio-btn:checked + .task{
+    border: 2px solid green;
+}
+
+main {
+    transition: all 0.8s;
+}

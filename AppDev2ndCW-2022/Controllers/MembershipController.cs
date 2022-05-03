@@ -1,4 +1,4 @@
-using AppDev2ndCW.Models;
+using AppDev2ndCW_2022.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AppDev2ndCW_2022.Controllers;

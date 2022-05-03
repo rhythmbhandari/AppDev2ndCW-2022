@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using AppDev2ndCW.Models;
+using AppDev2ndCW_2022.Models;
 
 namespace AppDev2ndCW_2022.Models
 {

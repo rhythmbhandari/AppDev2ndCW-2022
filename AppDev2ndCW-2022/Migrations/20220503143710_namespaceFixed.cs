@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AppDev2ndCW_2022.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class namespaceFixed : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,8 +15,8 @@ namespace AppDev2ndCW_2022.Migrations
                 {
                     ActorNumber = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ActorSurname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ActorFirstName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ActorSurname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ActorFirstName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -43,7 +43,7 @@ namespace AppDev2ndCW_2022.Migrations
                 {
                     LoanTypeNumber = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    LoanType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LoanType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LoanDuration = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -57,8 +57,8 @@ namespace AppDev2ndCW_2022.Migrations
                 {
                     MembershipCategoryNumber = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MembershipCategoryDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MembershipCategoryTotalLoans = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    MembershipCategoryDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MembershipCategoryTotalLoans = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -71,7 +71,7 @@ namespace AppDev2ndCW_2022.Migrations
                 {
                     ProducerNumber = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProducerName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ProducerName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -97,8 +97,8 @@ namespace AppDev2ndCW_2022.Migrations
                 {
                     UserNumber = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserPassword = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    UserType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserPassword = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -112,9 +112,9 @@ namespace AppDev2ndCW_2022.Migrations
                     MemberNumber = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MembershipCategoryNumber = table.Column<long>(type: "bigint", nullable: false),
-                    MemberLastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MemberFirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MemberAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MemberLastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MemberFirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MemberAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MemberDOB = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>

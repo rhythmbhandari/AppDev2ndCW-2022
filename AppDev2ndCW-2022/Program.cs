@@ -1,6 +1,5 @@
 using System.Reflection;
 using AppDev2ndCW_2022.Models;
-using AppDev2ndCW.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

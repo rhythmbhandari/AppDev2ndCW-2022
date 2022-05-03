@@ -1,5 +1,4 @@
-﻿using AppDev2ndCW.Models;
-using AppDev2ndCW_2022.Models;
+﻿using AppDev2ndCW_2022.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

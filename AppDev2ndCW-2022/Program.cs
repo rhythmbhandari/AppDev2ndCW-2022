@@ -1,6 +1,5 @@
 using System.Reflection;
 using AppDev2ndCW_2022.Models;
-using AppDev2ndCW.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +16,13 @@ builder.Services.AddDbContext<DataBaseContext>(options =>
 });
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    SeedData.Initialize(services);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

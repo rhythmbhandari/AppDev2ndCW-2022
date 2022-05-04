@@ -2,49 +2,52 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center -mt-36">
-    <div class="w-full flex flex-col gap-3 items-start">
-        <h1 class="self-center text-md text-gray-500 -mt-20">@ViewData["PieceOfShit"]</h1>
-        <form>
-            <input name="actor" type="text" placeholder="Enter an actor's name. Eg: Ryan Gosling" class="mt-2 shadow-md input-bordered text-lg input input-bordered w-[35.2rem] h-[4rem]"/>
-            <div class="mt-5 flex gap-8 justify-items-center items-center">
-                <div class="flex gap-2 w-full">
-                    <label for="radio1" class="cursor-pointer">
-                        <input type="radio" id="radio1" value="all" class="task__radio-btn hidden" name="radio">
-                        <span class="task px-20 py-3 bg-base-300 relative text-sm rounded-md bg-base-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="absolute -top-[7px] -right-[7px]" width="22" height="22" viewBox="0 0 27 27">
-                                <g id="Group_149" data-name="Group 149" transform="translate(-1170 -625)">
-                                    <g id="Ellipse_26" data-name="Ellipse 26" transform="translate(1170 625)" fill="#5d815e" stroke="#5d815d" stroke-width="3">
-                                        <circle cx="13.5" cy="13.5" r="13.5" stroke="none"/>
-                                        <circle cx="13.5" cy="13.5" r="12" fill="none"/>
+<div class="flex justify-center items-center">
+    <div class="text-center -mt-36">
+        <div class="w-full flex flex-col gap-3 items-start">
+            <h1 class="self-center text-md text-gray-500 -mt-20">@ViewData["PieceOfShit"]</h1>
+            <form>
+                <input name="actor" type="text" placeholder="Enter an actor's name. Eg: Ryan Gosling" class="mt-2 shadow-md input-bordered text-lg input input-bordered w-[35.2rem] h-[4rem]"/>
+                <div class="mt-5 flex gap-8 justify-items-center items-center">
+                    <div class="flex gap-2 w-full">
+                        <label for="radio1" class="cursor-pointer">
+                            <input type="radio" id="radio1" value="all" class="task__radio-btn hidden" name="radio">
+                            <span class="task px-20 py-3 bg-base-300 relative text-sm rounded-md bg-base-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="absolute -top-[7px] -right-[7px]" width="22" height="22" viewBox="0 0 27 27">
+                                    <g id="Group_149" data-name="Group 149" transform="translate(-1170 -625)">
+                                        <g id="Ellipse_26" data-name="Ellipse 26" transform="translate(1170 625)" fill="#5d815e" stroke="#5d815d" stroke-width="3">
+                                            <circle cx="13.5" cy="13.5" r="13.5" stroke="none"/>
+                                            <circle cx="13.5" cy="13.5" r="12" fill="none"/>
+                                        </g>
+                                        <path id="Path_58" data-name="Path 58" d="M5,12.571l3.714,3.714L18,7" transform="translate(1172 626.714)" fill="none" stroke="#f7f6ed" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
                                     </g>
-                                    <path id="Path_58" data-name="Path 58" d="M5,12.571l3.714,3.714L18,7" transform="translate(1172 626.714)" fill="none" stroke="#f7f6ed" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                                </g>
-                            </svg>
-                            Show all DVDs
-                        </span>
-                    </label>
-                    <label for="radio2" class="cursor-pointer">
-                        <input type="radio" id="radio2" value="available" class="task__radio-btn hidden" name="radio" checked>
-                        <span class="task px-20 py-3 bg-base-300 relative text-sm rounded-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="absolute -top-[7px] -right-[7px]" width="22" height="22" viewBox="0 0 27 27">
-                                <g id="Group_149" data-name="Group 149" transform="translate(-1170 -625)">
-                                    <g id="Ellipse_26" data-name="Ellipse 26" transform="translate(1170 625)" fill="#5d815e" stroke="#5d815d" stroke-width="3">
-                                        <circle cx="13.5" cy="13.5" r="13.5" stroke="none"/>
-                                        <circle cx="13.5" cy="13.5" r="12" fill="none"/>
+                                </svg>
+                                Show all DVDs
+                            </span>
+                        </label>
+                        <label for="radio2" class="cursor-pointer">
+                            <input type="radio" id="radio2" value="available" class="task__radio-btn hidden" name="radio" checked>
+                            <span class="task px-20 py-3 bg-base-300 relative text-sm rounded-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="absolute -top-[7px] -right-[7px]" width="22" height="22" viewBox="0 0 27 27">
+                                    <g id="Group_149" data-name="Group 149" transform="translate(-1170 -625)">
+                                        <g id="Ellipse_26" data-name="Ellipse 26" transform="translate(1170 625)" fill="#5d815e" stroke="#5d815d" stroke-width="3">
+                                            <circle cx="13.5" cy="13.5" r="13.5" stroke="none"/>
+                                            <circle cx="13.5" cy="13.5" r="12" fill="none"/>
+                                        </g>
+                                        <path id="Path_58" data-name="Path 58" d="M5,12.571l3.714,3.714L18,7" transform="translate(1172 626.714)" fill="none" stroke="#f7f6ed" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
                                     </g>
-                                    <path id="Path_58" data-name="Path 58" d="M5,12.571l3.714,3.714L18,7" transform="translate(1172 626.714)" fill="none" stroke="#f7f6ed" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                                </g>
-                            </svg>
-                            Show available DVDs
-                        </span>
-                    </label>
+                                </svg>
+                                Show available DVDs
+                            </span>
+                        </label>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <input type="submit" value="Search for DVD" class="btn bg-gray-700 w-[35rem] mt-5 h-[4rem] border-0 text-sm">
-            </div> 
-        </form>
-        <h1>@ViewBag.name</h1>
+                <div>
+                    <input type="submit" value="Search for DVD" class="btn bg-gray-700 w-[35rem] mt-5 h-[4rem] border-0 text-sm">
+                </div> 
+            </form>
+            <h1>@ViewBag.name</h1>
+        </div>
     </div>
+
 </div>

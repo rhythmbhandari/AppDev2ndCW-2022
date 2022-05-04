@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace AppDev2ndCW_2022.Views.Home;
+namespace AppDev2ndCW_2022.Views.DVD;
 
-public class SearchResult : PageModel
+public class NotLoaned : PageModel
 {
     public void OnGet()
     {

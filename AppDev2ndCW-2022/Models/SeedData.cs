@@ -26,31 +26,27 @@ namespace AppDev2ndCW_2022.Models
                 context.Actor.AddRange(
                     new Actor
                     {
-                        ActorNumber = 127863,
                         ActorSurname = "Poudyal",
                         ActorFirstName = "Simsim",
                     },
                     new Actor
                     {
-                        ActorNumber = 1378964,
                         ActorSurname = "Bhandari",
                         ActorFirstName = "Rimrim",
                     },
                     new Actor
                     {
-                        ActorNumber = 2389174,
                         ActorSurname = "Simsim",
                         ActorFirstName = "Galigali",
                     },
                     new Actor
                     {
-                        ActorNumber = 1438790,
                         ActorSurname = "Huhu",
                         ActorFirstName = "Hehe",
                     }
                 );
                 //Seeder throwing exception
-                //context.SaveChanges();
+                context.SaveChanges();
             }
         }
     }

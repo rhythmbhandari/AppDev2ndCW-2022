@@ -6,10 +6,22 @@ namespace AppDev2ndCW_2022.Controllers;
 public class MembershipController: Controller
 { 
     public readonly DataBaseContext dataBaseContext;
-    private readonly ILogger<HomeController> _logger;
+    private readonly ILogger<MembershipController> _logger;
 
-    public MembershipController()
+    public MembershipController(ILogger<MembershipController> logger, DataBaseContext db)
     {
-        
+        dataBaseContext = db;
+        _logger = logger;
     }
+
+    public IActionResult AllMembers()
+    {
+        return View();
+    }
+
+    public IActionResult NoLoans()
+    {
+        return View();
+    }
+    
 }

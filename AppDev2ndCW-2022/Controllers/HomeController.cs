@@ -17,9 +17,14 @@ namespace AppDev2ndCW_2022.Controllers
 
         public IActionResult Index(String actor, String radio)
         {
-            ViewData["PieceOfShit"] = "Simon";
-            ViewBag.name = actor + radio;
-            return View();
+            if (actor == null)
+            {
+                return View();
+            }
+
+            var actors = dataBaseContext.Actor.Where(x => x.ActorFirstName.Contains(actor));
+            ViewBag.allActors = actors;
+            return View("SearchResult");
         }
 
 

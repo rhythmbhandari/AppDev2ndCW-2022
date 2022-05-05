@@ -42,4 +42,11 @@ public class DVDController : Controller
         }
         return View("~/Views/Forms/AddActor.cshtml");
     }
+    
+    [AcceptVerbs("Get", "Post")]
+    public IActionResult AddDvd(DvdTitle DVD)
+    {
+        ViewBag.actors = dataBaseContext.Actor.ToArray();
+        return View("~/Views/Forms/AddDVD.cshtml");
+    }
 }

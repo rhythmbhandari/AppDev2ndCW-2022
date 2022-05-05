@@ -1,8 +1,8 @@
 <div class="flex justify-start w-full h-full px-20 mt-16">
-    <form>
+    <form class=" flex flex-col gap-5 w-full">
         <div class="form-control">
-            <label for="studio">Studio</label>
-            <select id="studio" class="select w-full max-w-xs">
+            <label class="text-sm mb-1" for="studio">Studio</label>
+            <select id="studio" class="select input-bordered w-96 max-w-xs">
                 <option disabled selected>Select a studio</option>
                 <option>Homer</option>
                 <option>Marge</option>
@@ -12,8 +12,8 @@
             </select>
         </div>
         <div class="form-control">
-            <label for="studio">Producer</label>
-            <select id="studio" class="select w-full max-w-xs">
+            <label class="text-sm mb-1" for="studio">Producer</label>
+            <select id="studio" class="select w-full input-bordered max-w-xs">
                 <option disabled selected>Select a producer</option>
                 <option>Homer</option>
                 <option>Marge</option>
@@ -23,14 +23,13 @@
             </select>
         </div>
         <div class="form-control">
-            <label for="studio">Cast member</label>
-            <select id="studio" class="select w-full max-w-xs">
-                <option disabled selected>Select a producer</option>
-                <option>Homer</option>
-                <option>Marge</option>
-                <option>Bart</option>
-                <option>Lisa</option>
-                <option>Maggie</option>
+            <label class="text-sm mb-1" for="studio">Cast member</label>
+            <select id="studio" class="select input-bordered w-full max-w-xs">
+                <option disabled selected>Select an actor</option>
+                @foreach (var actor in ViewBag.actors)
+                {
+                    <option>@actor.ActorSurname</option>
+                }
             </select>
         </div>
     </form>

@@ -22,7 +22,9 @@
                 </div>
             </div>
             <div class="flex gap-3">
-                <label x-on:click="DVD = !DVD" class="btn btn-primary modal-button">Add New DVD</label>
+                <label x-on:click="DVD = !DVD" class="btn btn-primary modal-button">
+                    <a asp-action="AddDvd" asp-controller="DVD">Add New DVD</a>
+                </label>
                 <label for="membership" class="btn btn-primary bg-error border-0 hover: modal-button">Remove DVD</label>
             </div>
         </div>

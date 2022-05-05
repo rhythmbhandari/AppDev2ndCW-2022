@@ -1,0 +1,16 @@
+@model Actor
+<div class="flex justify-start w-full">
+    <form action="/addActor" method="post">
+        <div class="flex form-control flex-col mt-4">
+            <label asp-for="ActorFirstName">First name</label>
+            <input id="firstName" asp-for="ActorFirstName" type="text" placeholder="First name" class="input input-bordered w-full max-w-xs">
+        </div>
+        <div class="flex form-control flex-col mt-4">
+            <label asp-for="ActorSurname">Last name</label>
+            <input id="lastName" asp-for="ActorSurname" type="text" placeholder="Last name" class="input input-bordered w-full max-w-xs">
+        </div>
+        <div class="form-control">
+            <input type="submit" class="btn btn-dark"/>
+        </div>
+    </form>
+</div>

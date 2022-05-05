@@ -1,11 +1,13 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@{ var name = "Simon";
+    var age = 33;}
 
 <div class="flex justify-center items-center">
     <div class="text-center -mt-36">
         <div class="w-full flex flex-col gap-3 items-start">
-            <h1 class="self-center text-md text-gray-500 -mt-20">@ViewData["PieceOfShit"]</h1>
+            <h1 class="self-center text-md text-gray-500 -mt-20">@age</h1>
             <form>
                 <input name="actor" type="text" placeholder="Enter an actor's name. Eg: Ryan Gosling" class="mt-2 shadow-md input-bordered text-lg input input-bordered w-[35.2rem] h-[4rem]"/>
                 <div class="mt-5 flex gap-8 justify-items-center items-center">

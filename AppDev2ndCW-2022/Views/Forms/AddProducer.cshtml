@@ -1,0 +1,13 @@
+@model Producer
+<div class="flex justify-center w-full">
+    <form action="/addProducer" method="post" class="flex flex-col items-center gap-5 mt-16">
+        <h2 class="text-xl mb-3">Add a new Producer</h2>
+        <div class="form-control">
+            <label asp-for="ProducerName" class="text-sm">Producer's name</label>
+            <input id="ProducerName" asp-for="ProducerName" type="text" placeholder="Eg: John Zeratsky" class="input input-bordered w-[30rem]">
+        </div>
+        <div class="form-control">
+            <input type="submit" class="btn bg-black w-[30rem]" value="Add Studio"/>
+        </div>
+    </form>
+</div>

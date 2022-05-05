@@ -1,36 +1,58 @@
-<div class="flex justify-start w-full h-full px-20 mt-16">
-    <form class=" flex flex-col gap-5 w-full">
+<div class="flex justify-center w-full h-full mt-10">
+    <form class="flex flex-col items-center gap-2 w-full">
+        <h2 class="text-xl mb-4">Add new DVD</h2>
         <div class="form-control">
             <label class="text-sm mb-1" for="studio">Studio</label>
-            <select id="studio" class="select input-bordered w-96 max-w-xs">
+            <select id="studio" class="select bg-base-200 input-bordered w-[35rem]">
                 <option disabled selected>Select a studio</option>
-                <option>Homer</option>
-                <option>Marge</option>
-                <option>Bart</option>
-                <option>Lisa</option>
-                <option>Maggie</option>
+                @foreach (var studio in ViewBag.studios)
+                    {
+                        <option>@studio.StudioName</option>
+                    }
             </select>
+            <a asp-action="AddStudio" asp-controller="DVD" class="self-end hover:cursor-pointer"><label class="label-text-alt font-semibold text-blue-400">Add new Studio</label></a>
         </div>
         <div class="form-control">
-            <label class="text-sm mb-1" for="studio">Producer</label>
-            <select id="studio" class="select w-full input-bordered max-w-xs">
+            <label class="text-sm mb-1" for="producer">Producer</label>
+            <select id="producer" class="select w-[35rem] bg-base-200 input-bordered">
                 <option disabled selected>Select a producer</option>
-                <option>Homer</option>
-                <option>Marge</option>
-                <option>Bart</option>
-                <option>Lisa</option>
-                <option>Maggie</option>
+                @foreach (var producer in ViewBag.producers)
+                    {
+                        <option>@producer.ProducerName</option>
+                    }
             </select>
+            <a asp-action="AddProducer" asp-controller="DVD" class="self-end hover:cursor-pointer"><label class="label-text-alt font-semibold text-blue-400">Add new Producer</label></a>
         </div>
-        <div class="form-control">
-            <label class="text-sm mb-1" for="studio">Cast member</label>
-            <select id="studio" class="select input-bordered w-full max-w-xs">
-                <option disabled selected>Select an actor</option>
+        <div class="form-control flex flex-col items-start">
+            <label class="text-sm mb-1 flex justify-between items-end w-[35rem]" for="studio">
+                <span>Cast Member</span>
+                <span class="text-xs">Hold ctrl/command to select multiple</span>
+            </label>
+            <select id="" class="select w-[35rem] bg-base-200 input-bordered h-[10rem] p-0 m-0" multiple="multiple">
+                <option none selected class="h-8 pl-4 bg-opacity-25 flex items-center w-full">None</option>
                 @foreach (var actor in ViewBag.actors)
                 {
-                    <option>@actor.ActorSurname</option>
+                    <option class="h-8 flex pl-4 items-center w-full">@actor.ActorSurname @actor.ActorFirstName</option>
                 }
             </select>
+            <a class="self-end" asp-action="AddActor" asp-controller="DVD"><label class="label-text-alt hover:cursor-pointer font-semibold text-blue-400">Add new Actor</label></a>
+        </div>
+        <div class="flex flex-col gap-7">
+            <div class="form-control">
+                <label class="text-sm mb-1" for="studio">Date released</label>
+                <input type="date" class="input bg-base-200 input-bordered w-[35rem]"/>
+            </div>
+            <div class="form-control">
+                <label class="text-sm mb-1" for="studio">Standard Charge</label>
+                <input type="number" class="input bg-base-200 input-bordered w-[35rem]"/>
+            </div>
+            <div class="form-control">
+                <label class="text-sm mb-1" for="studio">Penalty Charge</label>
+                <input type="number" class="input bg-base-200 input-bordered w-[35rem]"/>
+            </div>
+            <div class="form-control mb-10">
+                <input type="submit" class="bg-black btn w-[35rem]" value="Add DVD"/>
+            </div>
         </div>
     </form>
 </div>

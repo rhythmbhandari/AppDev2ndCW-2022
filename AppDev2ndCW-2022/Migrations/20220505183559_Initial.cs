@@ -84,7 +84,7 @@ namespace AppDev2ndCW_2022.Migrations
                 {
                     StudioNumber = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StudioName = table.Column<long>(type: "bigint", nullable: false)
+                    StudioName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppDev2ndCW_2022.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20220503170402_Initial")]
+    [Migration("20220505183559_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -266,8 +266,9 @@ namespace AppDev2ndCW_2022.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("StudioNumber"), 1L, 1);
 
-                    b.Property<long>("StudioName")
-                        .HasColumnType("bigint");
+                    b.Property<string>("StudioName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("StudioNumber");
 

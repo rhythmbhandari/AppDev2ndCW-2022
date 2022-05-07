@@ -1,6 +1,6 @@
 @model DvdCategory;
 <div class="flex justify-center w-full">
-    <form action="/addStudio" method="post" class="flex flex-col items-center gap-5 mt-16">
+    <form action="/addCategory" method="post" class="flex flex-col items-center gap-5 mt-16">
         <h2 class="text-xl mb-3">Add a new Category</h2>
         <div class="form-control">
             <label asp-for="CategoryDescription" class="text-sm mb-1">Category description</label>
@@ -9,8 +9,8 @@
         <div class="form-control">
             <label asp-for="AgeRestricted" class="text-sm mb-1">Age restricted</label>
             <select id="AgeRestricted" asp-for="AgeRestricted" type="text" placeholder="Age restricted" class="select input-bordered w-[30rem]">
-                <option>Yes</option>
-                <option selected>No</option>
+                <option value="Yes">Yes</option>
+                <option value="No" selected>No</option>
             </select>
         </div>
         <div class="form-control">

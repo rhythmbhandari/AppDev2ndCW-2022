@@ -1,4 +1,5 @@
 using AppDev2ndCW_2022.Models;
+using AppDev2ndCW_2022.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AppDev2ndCW_2022.Controllers;
@@ -44,10 +45,38 @@ public class DVDController : Controller
         return View("~/Views/Forms/AddActor.cshtml");
     }
 
-    [AcceptVerbs("Get", "Post")]
+    [HttpPost]
+    public IActionResult AddDvd(DvdViewModel viewModel, List<long> castMembers)
+    {
+        var timeNow = TimeOnly.FromDateTime(DateTime.Now);
+        DvdTitle dvdTitle = new DvdTitle();
+        dvdTitle.ProducerNumber = viewModel.ProducerNum;
+        dvdTitle.CategoryNumber = viewModel.CategoryNum;
+        dvdTitle.PenaltyCharge = viewModel.PenaltyCharge;
+        dvdTitle.StudioNumber = viewModel.StudioNum;
+        dvdTitle.DateReleased = viewModel.DatePosted;
+        dvdTitle.StandardCharge = viewModel.StandardCharge;
+        dataBaseContext.DvdTitle.Add(dvdTitle);
+        dataBaseContext.SaveChanges();
+
+        foreach (var actor in castMembers)
+        {
+            CastMember castMember = new CastMember();
+            castMember.ActorNumber = actor;
+            castMember.DvdNumber = dvdTitle.DvdNumber;
+            dataBaseContext.CastMember.Add(castMember);
+            dataBaseContext.SaveChanges();
+        }
+
+        return Redirect("/DVD/AddDvd");
+    }
+    
+    /*Controller for add DVD get*/
+    [HttpGet]
     public IActionResult AddDvd()
     {
         ViewBag.actors = dataBaseContext.Actor.ToArray();
+        ViewBag.categories = dataBaseContext.DvdCategory.ToArray();
         ViewBag.studios = dataBaseContext.Studio.ToArray();
         ViewBag.producers = dataBaseContext.Producer.ToArray();
         return View("~/Views/Forms/AddDVD.cshtml");
@@ -60,7 +89,7 @@ public class DVDController : Controller
     {
         if (Request.Method == "POST")
         {
-            dataBaseContext.Add(studio);
+            dataBaseContext.Studio.Add(studio);
             dataBaseContext.SaveChanges();
             return Redirect("/DVD/AddDvd");
         }

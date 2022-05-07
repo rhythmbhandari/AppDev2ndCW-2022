@@ -6,7 +6,7 @@ namespace AppDev2ndCW_2022.Models
     {
         [Key]
         public long StudioNumber { get; set; }
-        public long StudioName { get; set; }
+        public string? StudioName { get; set; }
 
     }
 }

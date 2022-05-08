@@ -1,40 +1,40 @@
-@model AppDev2ndCW_2022.ViewModel.DvdViewModel
+@model Member
 <div class="flex justify-center w-full h-full mt-10">
-    <form action="/DVD/AddDvd" method="post" class="flex flex-col items-center gap-2 w-full">
-        <h2 class="text-xl mb-4">Add new DVD</h2>
+    <form action="/Membership/AddMembership" method="post" class="flex flex-col items-center gap-2 w-full">
+        <h2 class="text-xl mb-4">Add new member</h2>
         <div class="form-control">
-            <label asp-for="StudioNum" class="text-sm mb-1" for="studio">Studio</label>
-            <select asp-for="StudioNum" id="studio" class="select bg-base-200 input-bordered w-[35rem]">
-                <option disabled selected value="null">Select a studio</option>
-                @if (ViewBag.studios is not null)
+            <label asp-for="MembershipCategoryNumber" class="text-sm mb-1" for="studio">Membership Category</label>
+            <select asp-for="MembershipCategoryNumber" id="studio" class="select bg-base-200 input-bordered w-[35rem]">
+                <option disabled selected value="null">Select a category</option>
+                @if (ViewBag.membershipCategories is not null)
                 {
-                    @foreach (var studio in ViewBag.studios)
+                    @foreach (var category in ViewBag.membershipCategories)
                     {
-                        <option value="@studio.StudioNumber">@studio.StudioName</option>
+                        <option value="@category.MembershipCategoryNumber">@category.MembershipCategoryDescription</option>
                     }
                 }
             </select>
-            <a asp-action="AddStudio" asp-controller="DVD" class="self-end hover:cursor-pointer"><label class="label-text-alt font-semibold text-blue-400">Add new Studio</label></a>
+            <a asp-action="AddMembershipCategory" asp-controller="Membership" class="self-end hover:cursor-pointer"><label class="label-text-alt font-semibold text-blue-400">Add new category</label></a>
         </div>
         <div class="flex flex-col gap-7">
             <div class="form-control">
-                <label asp-for="DatePosted" class="text-sm mb-1" for="studio">First Name</label>
-                <input asp-for="DatePosted" type="date" class="input bg-base-200 input-bordered w-[35rem]"/>
+                <label asp-for="MemberFirstName" class="text-sm mb-1" for="studio">First Name</label>
+                <input asp-for="MemberFirstName" placeholder="Eg: Ram" type="text" class="input bg-base-200 input-bordered w-[35rem]"/>
             </div>
             <div class="form-control">
-                <label asp-for="StandardCharge" class="text-sm mb-1" for="studio">Last Name</label>
-                <input asp-for="StandardCharge" type="number" class="input bg-base-200 input-bordered w-[35rem]"/>
+                <label asp-for="MemberLastName" class="text-sm mb-1" for="studio">Last Name</label>
+                <input asp-for="MemberLastName" placeholder="Eg: Dass" type="text" class="input bg-base-200 input-bordered w-[35rem]"/>
             </div>
             <div class="form-control">
-                <label asp-for="PenaltyCharge" class="text-sm mb-1" for="studio">Address</label>
-                <input asp-for="PenaltyCharge" type="number" class="input bg-base-200 input-bordered w-[35rem]"/>
+                <label asp-for="MemberAddress" class="text-sm mb-1" for="studio">Address</label>
+                <input asp-for="MemberAddress" placeholder="Eg: Nepal" type="text" class="input bg-base-200 input-bordered w-[35rem]"/>
             </div>
             <div class="form-control">
-                <label asp-for="PenaltyCharge" class="text-sm mb-1" for="studio">Date of Birth</label>
-                <input asp-for="PenaltyCharge" type="number" class="input bg-base-200 input-bordered w-[35rem]"/>
+                <label asp-for="MemberDOB" class="text-sm mb-1" for="studio">Date of Birth</label>
+                <input asp-for="MemberDOB" type="date" class="input bg-base-200 input-bordered w-[35rem]"/>
             </div>
             <div class="form-control mb-10">
-                <input type="submit" class="bg-black btn w-[35rem]" value="Add DVD"/>
+                <input type="submit" class="bg-black btn w-[35rem]" value="Add Member"/>
             </div>
         </div>
     </form>

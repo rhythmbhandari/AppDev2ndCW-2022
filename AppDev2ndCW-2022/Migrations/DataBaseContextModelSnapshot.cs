@@ -38,7 +38,7 @@ namespace AppDev2ndCW_2022.Migrations
 
                     b.HasKey("ActorNumber");
 
-                    b.ToTable("Actor");
+                    b.ToTable("Actor", (string)null);
                 });
 
             modelBuilder.Entity("AppDev2ndCW_2022.Models.CastMember", b =>
@@ -53,7 +53,7 @@ namespace AppDev2ndCW_2022.Migrations
 
                     b.HasIndex("ActorNumber");
 
-                    b.ToTable("CastMember");
+                    b.ToTable("CastMember", (string)null);
                 });
 
             modelBuilder.Entity("AppDev2ndCW_2022.Models.DvdCategory", b =>
@@ -74,7 +74,7 @@ namespace AppDev2ndCW_2022.Migrations
 
                     b.HasKey("CategoryNumber");
 
-                    b.ToTable("DvdCategory");
+                    b.ToTable("DvdCategory", (string)null);
                 });
 
             modelBuilder.Entity("AppDev2ndCW_2022.Models.DvdCopy", b =>
@@ -95,7 +95,7 @@ namespace AppDev2ndCW_2022.Migrations
 
                     b.HasIndex("DvdNumber");
 
-                    b.ToTable("DvdCopy");
+                    b.ToTable("DvdCopy", (string)null);
                 });
 
             modelBuilder.Entity("AppDev2ndCW_2022.Models.DvdTitle", b =>
@@ -132,7 +132,7 @@ namespace AppDev2ndCW_2022.Migrations
 
                     b.HasIndex("StudioNumber");
 
-                    b.ToTable("DvdTitle");
+                    b.ToTable("DvdTitle", (string)null);
                 });
 
             modelBuilder.Entity("AppDev2ndCW_2022.Models.Loan", b =>
@@ -169,7 +169,7 @@ namespace AppDev2ndCW_2022.Migrations
 
                     b.HasIndex("MemberNumber");
 
-                    b.ToTable("Loan");
+                    b.ToTable("Loan", (string)null);
                 });
 
             modelBuilder.Entity("AppDev2ndCW_2022.Models.LoanTypes", b =>
@@ -188,7 +188,7 @@ namespace AppDev2ndCW_2022.Migrations
 
                     b.HasKey("LoanTypeNumber");
 
-                    b.ToTable("LoanTypes");
+                    b.ToTable("LoanTypes", (string)null);
                 });
 
             modelBuilder.Entity("AppDev2ndCW_2022.Models.Member", b =>
@@ -218,7 +218,7 @@ namespace AppDev2ndCW_2022.Migrations
 
                     b.HasIndex("MembershipCategoryNumber");
 
-                    b.ToTable("Member");
+                    b.ToTable("Member", (string)null);
                 });
 
             modelBuilder.Entity("AppDev2ndCW_2022.Models.MembershipCategory", b =>
@@ -237,7 +237,7 @@ namespace AppDev2ndCW_2022.Migrations
 
                     b.HasKey("MembershipCategoryNumber");
 
-                    b.ToTable("MembershipCategory");
+                    b.ToTable("MembershipCategory", (string)null);
                 });
 
             modelBuilder.Entity("AppDev2ndCW_2022.Models.Producer", b =>
@@ -253,7 +253,7 @@ namespace AppDev2ndCW_2022.Migrations
 
                     b.HasKey("ProducerNumber");
 
-                    b.ToTable("Producer");
+                    b.ToTable("Producer", (string)null);
                 });
 
             modelBuilder.Entity("AppDev2ndCW_2022.Models.Studio", b =>
@@ -269,7 +269,7 @@ namespace AppDev2ndCW_2022.Migrations
 
                     b.HasKey("StudioNumber");
 
-                    b.ToTable("Studio");
+                    b.ToTable("Studio", (string)null);
                 });
 
             modelBuilder.Entity("AppDev2ndCW_2022.Models.User", b =>
@@ -288,7 +288,7 @@ namespace AppDev2ndCW_2022.Migrations
 
                     b.HasKey("UserNumber");
 
-                    b.ToTable("User");
+                    b.ToTable("User", (string)null);
                 });
 
             modelBuilder.Entity("AppDev2ndCW_2022.Models.CastMember", b =>

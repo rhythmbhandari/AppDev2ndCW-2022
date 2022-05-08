@@ -1,1 +1,18 @@
-@model MembershipCategory
+@model AppDev2ndCW_2022.ViewModel.MembershipViewModel
+
+<div class="flex justify-center w-full">
+    <form action="/addMembershipCategory" method="post" class="flex flex-col items-center gap-5 mt-16">
+        <h2 class="text-xl mb-3">Add a new Category</h2>
+        <div class="form-control">
+            <label asp-for="MembershipCategoryDescription" class="text-sm mb-1">Membership category description</label>
+            <input id="MembershipCategoryDescription" asp-for="MembershipCategoryDescription" type="text" class="input input-bordered w-[30rem]">
+        </div>
+        <div class="form-control">
+            <label asp-for="MembershipCategoryTotalLoans" class="text-sm mb-1">Total loans</label>
+            <input id="MembershipCategoryTotalLoans" asp-for="MembershipCategoryTotalLoans" type="number" class="input input-bordered w-[30rem]">
+        </div>
+        <div class="form-control">
+            <input type="submit" class="btn bg-black w-[30rem]" value="Add Membership Category"/>
+        </div>
+    </form>
+</div>

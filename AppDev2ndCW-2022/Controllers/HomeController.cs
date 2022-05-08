@@ -1,6 +1,15 @@
 ﻿using AppDev2ndCW_2022.Models;
+using AppDev2ndCW_2022.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace AppDev2ndCW_2022.Controllers
 {
@@ -8,11 +17,73 @@ namespace AppDev2ndCW_2022.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         public readonly DataBaseContext dataBaseContext;
+        private readonly UserService _userService;
 
-        public HomeController(ILogger<HomeController> logger, DataBaseContext db)
+        public HomeController(ILogger<HomeController> logger, DataBaseContext db, UserService userService)
         {
             _logger = logger;
             dataBaseContext = db;
+            _userService = userService;
+        }
+
+        public IActionResult IndexTest(bool Islogout = false)
+        {
+            ViewBag.islogout = Islogout;
+            return View();
+        }
+
+        public IActionResult Register(User users)
+        {
+            users.UserName = "admin";
+            users.contacts = "1234567890";
+            users.name = "admin";
+            users.UserPassword = "admin";
+            users.UserType = "admin";
+            dataBaseContext.User.Add(users);
+            dataBaseContext.SaveChanges();
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Login(string ReturnUrl)
+        {
+            ViewData["ReturnUrl"] = ReturnUrl;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(string email, string contact, string ReturnUrl)
+        {
+            ViewData["ReturnUrl"] = ReturnUrl;
+
+            if (_userService.TryValidateUser(email, contact, out List<Claim> claims))
+            {
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+
+                await HttpContext.SignInAsync(claimsPrincipal);
+                if (ReturnUrl != null)
+                {
+                    return Redirect(ReturnUrl);
+                }
+                else
+                {
+                    return RedirectToAction("Dashboard", "Users", new { IsLogin = true });
+                }
+            }
+            else
+            {
+                TempData["Error"] = "Invalid username or password";
+                return Redirect("/");
+            }
+        }
+
+
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return Redirect("/");
         }
 
         public IActionResult Index(String actor, String radio)

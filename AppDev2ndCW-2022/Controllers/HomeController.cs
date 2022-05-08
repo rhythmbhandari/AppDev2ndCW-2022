@@ -32,6 +32,7 @@ namespace AppDev2ndCW_2022.Controllers
             return View();
         }
 
+        [Route("register")]
         public IActionResult Register(User users)
         {
             users.UserName = "admin";
@@ -44,17 +45,18 @@ namespace AppDev2ndCW_2022.Controllers
             return View();
         }
 
+
         [HttpGet]
-        public IActionResult Login(string ReturnUrl)
+        public IActionResult Login()
         {
-            ViewData["ReturnUrl"] = ReturnUrl;
             return View();
         }
 
+        
         [HttpPost]
-        public async Task<IActionResult> Login(string email, string contact, string ReturnUrl)
+        public async Task<IActionResult> Login(string email, string contact)
         {
-            ViewData["ReturnUrl"] = ReturnUrl;
+            /*ViewData["ReturnUrl"] = ReturnUrl;*/
 
             if (_userService.TryValidateUser(email, contact, out List<Claim> claims))
             {
@@ -68,7 +70,8 @@ namespace AppDev2ndCW_2022.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Dashboard", "Users", new { IsLogin = true });
+                    /*return RedirectToAction("AllMembers","DVDController", new{IsLogin = true} );*/
+                    return Redirect("/privacy");
                 }
             }
             else
@@ -80,12 +83,14 @@ namespace AppDev2ndCW_2022.Controllers
 
 
         [Authorize]
+        [Route("logout")]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();
-            return Redirect("/");
+            return Redirect("/login");
         }
-
+        
+        [Authorize]
         public IActionResult Index(String actor, String radio)
         {
             if (actor == null)
@@ -131,6 +136,7 @@ namespace AppDev2ndCW_2022.Controllers
         }
 
 
+        [Route("privacy")]
         public IActionResult Privacy()
         {
             return View();

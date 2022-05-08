@@ -15,21 +15,36 @@ public class DVDController : Controller
         dataBaseContext = db;
     }
     // GET
-    public IActionResult AllMembers()
+    public IActionResult AllDvds()
     {
-        var dvd = (from d in dataBaseContext.DvdTitle
-            join c in dataBaseContext.CastMember on d.DvdNumber equals c.DvdNumber
-            join a in dataBaseContext.Actor on c.ActorNumber equals a.ActorNumber
-            join s in dataBaseContext.Studio on d.StudioNumber equals s.StudioNumber
-            join p in dataBaseContext.Producer on d.ProducerNumber equals p.ProducerNumber
-            orderby d.DateReleased
-            select new
+        List<DvdListViewModel> dvdList = new List<DvdListViewModel>();
+        var allDvds = dataBaseContext.DvdTitle.OrderBy(x => x.DateReleased).ToArray();
+        foreach (var dvd in allDvds)
+        {
+            DvdListViewModel dvdListViewModel = new DvdListViewModel();
+            dvdListViewModel.dvdName = dvd.DvdName;
+            dvdListViewModel.actors = new List<string>();
+            var actors = (from c in dataBaseContext.CastMember
+                join a in dataBaseContext.Actor on c.ActorNumber equals a.ActorNumber
+                where c.DvdNumber == dvd.DvdNumber orderby a.ActorSurname
+                select new
+                {
+                    actorName = a.ActorFirstName + " " + a.ActorSurname,
+                }).ToArray();
+            foreach (var actor in actors)
             {
-                title = d.DvdNumber,
-                studio = s.StudioName,
-                producer = p.ProducerName,
-            });
-        ViewBag.message = "Success";
+                dvdListViewModel.actors.Add(actor.actorName);
+            }
+
+            var producer = dataBaseContext.Producer.Single(x => x.ProducerNumber == dvd.ProducerNumber);
+            var studio = dataBaseContext.Studio.Single(x => x.StudioNumber == dvd.StudioNumber);
+
+            dvdListViewModel.producerName = producer.ProducerName;
+            dvdListViewModel.studioName = studio.StudioName;
+            dvdList.Add(dvdListViewModel);
+        }
+
+        ViewBag.context = dvdList;
         return View();
     }
 
@@ -52,7 +67,7 @@ public class DVDController : Controller
         {
             dataBaseContext.Add(actor);
             dataBaseContext.SaveChanges();
-            return Redirect("/DVD/AllMembers");
+            return Redirect("/DVD/AddDvd");
         }
         return View("~/Views/Forms/AddActor.cshtml");
     }

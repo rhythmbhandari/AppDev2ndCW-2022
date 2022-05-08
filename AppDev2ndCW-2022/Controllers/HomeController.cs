@@ -22,8 +22,18 @@ namespace AppDev2ndCW_2022.Controllers
                 return View();
             }
 
-            var actors = dataBaseContext.Actor.Where(x => x.ActorFirstName.Contains(actor));
-            ViewBag.allActors = actors;
+            var dvd = (from t in dataBaseContext.DvdTitle
+                join c in dataBaseContext.CastMember on t.DvdNumber equals c.DvdNumber
+                join a in dataBaseContext.Actor on c.ActorNumber equals a.ActorNumber
+                where a.ActorSurname == actor
+                select new
+                {
+                    DvdNumber = c.DvdNumber,
+                    DateReleased = t.DateReleased,
+                    StandardCharge = t.StandardCharge,
+                    PenaltyCharge = t.PenaltyCharge,
+                }).ToArray();
+            ViewBag.allDvd = dvd;
             return View("SearchResult");
         }
 

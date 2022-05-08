@@ -23,5 +23,9 @@ public class MembershipController: Controller
     {
         return View();
     }
-    
+
+    public IActionResult AddMembership()
+    {
+        return View("~/Views/Forms/AddMembership.cshtml");
+    }
 }

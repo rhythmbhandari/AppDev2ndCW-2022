@@ -17,6 +17,18 @@ public class DVDController : Controller
     // GET
     public IActionResult AllMembers()
     {
+        var dvd = (from d in dataBaseContext.DvdTitle
+            join c in dataBaseContext.CastMember on d.DvdNumber equals c.DvdNumber
+            join a in dataBaseContext.Actor on c.ActorNumber equals a.ActorNumber
+            join s in dataBaseContext.Studio on d.StudioNumber equals s.StudioNumber
+            join p in dataBaseContext.Producer on d.ProducerNumber equals p.ProducerNumber
+            orderby d.DateReleased
+            select new
+            {
+                title = d.DvdNumber,
+                studio = s.StudioName,
+                producer = p.ProducerName,
+            });
         ViewBag.message = "Success";
         return View();
     }
@@ -122,5 +134,22 @@ public class DVDController : Controller
             return Redirect("/DVD/AddDvd");
         }
         return View("~/Views/Forms/AddCategory.cshtml");
+    }
+    
+    /*Controller for adding DVD copy*/
+    [HttpPost]
+    public IActionResult AddDvdCopy(DvdCopy dvdCopy)
+    {
+        dataBaseContext.DvdCopy.Add(dvdCopy);
+        dataBaseContext.SaveChanges();
+        return Redirect("/DVD/AddDvdCopy");
+    }
+
+    [HttpGet]
+    public IActionResult AddDvdCopy()
+    {
+        var dvdTitle = dataBaseContext.DvdTitle.ToArray();
+        ViewBag.dvdTitles = dvdTitle;
+        return View("~/Views/Forms/AddDVDCopy.cshtml");
     }
 }

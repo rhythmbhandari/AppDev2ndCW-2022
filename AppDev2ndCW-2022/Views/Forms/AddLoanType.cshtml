@@ -1,0 +1,17 @@
+@model LoanTypes
+<div class="flex justify-center w-full">
+    <form action="/addLoanType" method="post" class="flex flex-col items-center gap-5 mt-16">
+        <h2 class="text-xl mb-3">Add new loan type</h2>
+        <div class="form-control">
+            <label asp-for="LoanType" class="text-sm">Loan type</label>
+            <input id="LoanType" asp-for="LoanType" type="text" placeholder="Eg: Long" class="input input-bordered w-[30rem]">
+        </div>
+        <div class="form-control">
+            <label asp-for="LoanDuration" class="text-sm">Loan duration (in days)</label>
+            <input id="LoanDuration" asp-for="LoanDuration" type="number" placeholder="Eg: 10" class="input input-bordered w-[30rem]">
+        </div>
+        <div class="form-control">
+            <input type="submit" class="btn bg-black w-[30rem]" value="Add loan type"/>
+        </div>
+    </form>
+</div>

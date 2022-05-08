@@ -17,12 +17,36 @@ public class MembershipController: Controller
 
     public IActionResult AllMembers()
     {
+        var members = dataBaseContext.Member.ToArray();
+        ViewBag.members = members;
         return View();
     }
 
     public IActionResult NoLoans()
     {
         return View();
+    }
+
+    public IActionResult MembershipDetails(int id)
+    {
+        var member = dataBaseContext.Member.Single(m => m.MemberNumber == id);
+        var contextData = (from m in dataBaseContext.Member
+            join l in dataBaseContext.Loan on m.MemberNumber equals l.MemberNumber
+            join dc in dataBaseContext.DvdCopy on l.CopyNumber equals dc.CopyNumber
+            join dt in dataBaseContext.DvdTitle on dc.DvdNumber equals dt.DvdNumber
+            where m.MemberNumber == id && l.DateOut > DateTime.Now.AddDays(-31)
+            select new
+            {
+                dvdTitle = dt.DvdNumber,
+                dvdCopy = dc.CopyNumber,
+                dvdBorrowedDate = l.DateOut,
+                dvdReturnDate = l.DateReturned,
+                totalLoans = dataBaseContext.Loan.Where(l => l.MemberNumber == id).Count(),
+            });
+        ViewBag.contextData = contextData;
+        ViewBag.firstName = member.MemberFirstName;
+        ViewBag.lastName = member.MemberLastName;
+        return View("MemberDetails");
     }
 
     [HttpPost]

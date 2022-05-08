@@ -12,6 +12,7 @@
     <div class="mt-16 w-full">
         <div class="flex justify-between">
             <input type="text" placeholder="Search by name or number" class="input bg-gray-600 w-[30rem] max-w-xs text-lg shadow-sm">
+            <a asp-action="AddMembership" asp-controller="Membership"><button class="btn btn-active btn-primary">Add Membership</button></a>
         </div>
     </div>
     <div class="overflow-x-auto w-full mt-6">
@@ -19,34 +20,26 @@
             <!-- head -->
             <thead class="bg-gray-500">
             <tr class="bg-gray-500">
-                <th></th>
                 <th>Name</th>
-                <th>Job</th>
-                <th>Favorite Color</th>
+                <th>Address</th>
+                <th>Date of Birth</th>
+                <th>Membership category number</th>
             </tr>
             </thead>
             <tbody>
             <!-- row 1 -->
-            <tr>
-                <th>1</th>
-                <td>Cy Ganderton</td>
-                <td>Quality Control Specialist</td>
-                <td>Blue</td>
-            </tr>
-            <!-- row 2 -->
-            <tr>
-                <th>2</th>
-                <td>Hart Hagerty</td>
-                <td>Desktop Support Technician</td>
-                <td>Purple</td>
-            </tr>
-            <!-- row 3 -->
-            <tr>
-                <th>3</th>
-                <td>Brice Swyre</td>
-                <td>Tax Accountant</td>
-                <td>Red</td>
-            </tr>
+            @if (ViewBag.members is not null)
+            {
+                @foreach (var member in ViewBag.members)
+                {
+                    <tr>
+                    <th><a href="@Url.Action("MembershipDetails", "Membership", new{id = @member.MemberNumber})" class="hover:text-underline cursor-pointer hover:font-bold">@member.MemberFirstName @member.MemberLastName</a></th>
+                        <td>@member.MemberAddress</td>
+                        <td>@member.MemberDOB</td>
+                        <td>@member.MembershipCategoryNumber</td>
+                    </tr>
+                }
+            }
             </tbody>
         </table>
     </div>

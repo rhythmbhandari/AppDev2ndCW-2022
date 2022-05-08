@@ -8,6 +8,7 @@ public class MembershipController: Controller
 { 
     public readonly DataBaseContext dataBaseContext;
     private readonly ILogger<MembershipController> _logger;
+    
 
     public MembershipController(ILogger<MembershipController> logger, DataBaseContext db)
     {
@@ -18,7 +19,26 @@ public class MembershipController: Controller
     public IActionResult AllMembers()
     {
         var members = dataBaseContext.Member.ToArray();
-        ViewBag.members = members;
+        List<AllMembersViewModel> membersList = new List<AllMembersViewModel>();
+        foreach (var member in members)
+        {
+            AllMembersViewModel allMembersViewModel = new AllMembersViewModel();
+            var loans = dataBaseContext.Loan.Where(x => x.MemberNumber == member.MemberNumber && x.DateReturned == null).Count();
+            var totalAllowedLoans = (from m in dataBaseContext.Member
+                join mc in dataBaseContext.MembershipCategory on m.MembershipCategoryNumber equals mc
+                    .MembershipCategoryNumber
+                where m.MemberNumber == member.MemberNumber
+                select new
+                {
+                    allowedLoan = mc.MembershipCategoryTotalLoans,
+                }).ToArray()[0];
+            allMembersViewModel.member = member;
+            allMembersViewModel.count = loans;
+            allMembersViewModel.totalAllowedLoans = long.Parse(totalAllowedLoans.allowedLoan);
+            membersList.Add(allMembersViewModel);
+
+        }
+        ViewBag.members = membersList;
         return View();
     }
 

@@ -12,20 +12,20 @@ public class LoanController : Controller
         dataBaseContext = db;
     }
     // GET
-    public IActionResult Index(int copyNumber)
+    public IActionResult Index(int? copyNumber)
     {
-        if (!String.IsNullOrEmpty(copyNumber.ToString()))
+        if (copyNumber is not null)
         {
             var loan = (from l in dataBaseContext.Loan
                 join m in dataBaseContext.Member on l.MemberNumber equals m.MemberNumber
                 join dc in dataBaseContext.DvdCopy on l.CopyNumber equals dc.CopyNumber
                 join dt in dataBaseContext.DvdTitle on dc.DvdNumber equals dt.DvdNumber
-                where l.CopyNumber == copyNumber orderby l.DateOut descending
+                where l.CopyNumber == copyNumber orderby l.DateOut
                 select new
                 {
                     memberName = m.MemberFirstName + " " + m.MemberLastName,
-                    dateOut = l.DateOut,
-                    dateDue = l.DateDue,
+                    dateOut = l.DateOut.Date,
+                    dateDue = l.DateDue.Date,
                     dateReturned = l.DateReturned,
                     dvdName = dt.DvdName
                 }).First();

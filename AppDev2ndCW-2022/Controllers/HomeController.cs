@@ -22,18 +22,40 @@ namespace AppDev2ndCW_2022.Controllers
                 return View();
             }
 
-            var dvd = (from t in dataBaseContext.DvdTitle
-                join c in dataBaseContext.CastMember on t.DvdNumber equals c.DvdNumber
-                join a in dataBaseContext.Actor on c.ActorNumber equals a.ActorNumber
-                where a.ActorSurname == actor
-                select new
-                {
-                    DvdNumber = c.DvdNumber,
-                    DateReleased = t.DateReleased,
-                    StandardCharge = t.StandardCharge,
-                    PenaltyCharge = t.PenaltyCharge,
-                }).ToArray();
-            ViewBag.allDvd = dvd;
+            if (radio == "all")
+            {
+                var dvd = (from t in dataBaseContext.DvdTitle
+                    join c in dataBaseContext.CastMember on t.DvdNumber equals c.DvdNumber
+                    join a in dataBaseContext.Actor on c.ActorNumber equals a.ActorNumber
+                    where a.ActorSurname == actor
+                    select new
+                    {
+                        DvdName = t.DvdName,
+                        DvdNumber = c.DvdNumber,
+                        DateReleased = t.DateReleased,
+                        StandardCharge = t.StandardCharge,
+                        PenaltyCharge = t.PenaltyCharge,
+                    }).ToArray();
+                ViewBag.allDvd = dvd;
+            }
+            else if (radio == "available")
+            {
+                var dvd = (from t in dataBaseContext.DvdTitle
+                    join c in dataBaseContext.CastMember on t.DvdNumber equals c.DvdNumber
+                    join a in dataBaseContext.Actor on c.ActorNumber equals a.ActorNumber
+                    join dc in dataBaseContext.DvdCopy on t.DvdNumber equals dc.DvdNumber
+                    join l in dataBaseContext.Loan on dc.CopyNumber equals l.CopyNumber
+                    where a.ActorSurname == actor && l.DateReturned == null
+                    select new
+                    {
+                        DvdName = t.DvdName,
+                        DvdNumber = c.DvdNumber,
+                        DateReleased = t.DateReleased,
+                        StandardCharge = t.StandardCharge,
+                        PenaltyCharge = t.PenaltyCharge,
+                    }).ToArray();
+                ViewBag.allDvd = dvd;
+            }
             return View("SearchResult");
         }
 

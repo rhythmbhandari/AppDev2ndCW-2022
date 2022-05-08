@@ -63,6 +63,7 @@ public class DVDController : Controller
         var timeNow = TimeOnly.FromDateTime(DateTime.Now);
         DvdTitle dvdTitle = new DvdTitle();
         dvdTitle.ProducerNumber = viewModel.ProducerNum;
+        dvdTitle.DvdName = viewModel.DvdName;
         dvdTitle.CategoryNumber = viewModel.CategoryNum;
         dvdTitle.PenaltyCharge = viewModel.PenaltyCharge;
         dvdTitle.StudioNumber = viewModel.StudioNum;

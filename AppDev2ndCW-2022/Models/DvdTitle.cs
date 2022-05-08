@@ -7,7 +7,7 @@ namespace AppDev2ndCW_2022.Models
     {
         [Key]
         public long DvdNumber { get; set; }
-
+        public string DvdName { get; set; }
         public long ProducerNumber { get; set; }
         public long CategoryNumber { get; set; }
         public long StudioNumber { get; set; }

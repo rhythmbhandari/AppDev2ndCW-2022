@@ -2,6 +2,10 @@
 <div class="flex justify-center w-full h-full mt-10">
     <form action="/DVD/AddDvd" method="post" class="flex flex-col items-center gap-2 w-full">
         <h2 class="text-xl mb-4">Add new DVD</h2>
+        <div class="form-control mb-4">
+            <label asp-for="DvdName" class="text-sm mb-1" for="studio">Dvd Name</label>
+            <input asp-for="DvdName" type="text" class="input bg-base-200 input-bordered w-[35rem]"/>
+        </div>
         <div class="form-control">
             <label asp-for="StudioNum" class="text-sm mb-1" for="studio">Studio</label>
             <select asp-for="StudioNum" id="studio" class="select bg-base-200 input-bordered w-[35rem]">

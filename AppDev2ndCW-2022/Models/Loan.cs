@@ -13,7 +13,7 @@ namespace AppDev2ndCW_2022.Models
         public long MemberNumber { get; set; }
         public DateTime DateOut { get; set; }
         public DateTime DateDue { get; set; }
-        public DateTime DateReturned { get; set; }
+        public DateTime? DateReturned { get; set; }
         
         [ForeignKey("LoanTypeNumber")]
         public LoanTypes? LoanType { get; set; }

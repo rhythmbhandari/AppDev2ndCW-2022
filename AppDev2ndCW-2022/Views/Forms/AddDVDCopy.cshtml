@@ -3,14 +3,14 @@
     <form action="/DVD/AddDvdCopy" method="post" class="flex flex-col items-center gap-4 w-full">
         <h2 class="text-xl mb-4">Add new Dvd copy</h2>
         <div class="form-control">
-            <label asp-for="DvdNumber" class="text-sm mb-1" for="studio">Dvd Number</label>
+            <label asp-for="DvdNumber" class="text-sm mb-1" for="studio">Dvd title</label>
             <select asp-for="DvdNumber" id="studio" class="select bg-base-200 input-bordered w-[35rem]">
-                <option disabled selected value="null">Select a number</option>
+                <option disabled selected value="null">Select a title</option>
                 @if (ViewBag.dvdTitles is not null)
                 {
                     @foreach (var dvdTitle in ViewBag.dvdTitles)
                     {
-                        <option value="@dvdTitle.DvdNumber">@dvdTitle.DvdNumber</option>
+                        <option value="@dvdTitle.DvdNumber">@dvdTitle.DvdName</option>
                     }
                 }
             </select>

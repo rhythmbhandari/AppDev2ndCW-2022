@@ -1,17 +1,16 @@
-<div class="flex flex-col justify-start mt-16">
+<div class="flex flex-col justify-start mt-16 px-24">
     <h3 class="mb-6 text-sm text-gray-500">Showing all results</h3>
     <div class="grid grid-cols-5 gap-20">
 
         @foreach (var dvd in ViewBag.allDvd)
         {
             <div class="flex flex-col w-full">
-                <div class="h-[10rem] w-[12rem] bg-gray-400">
-                </div>
-                <div>
-                    <h2 class="mt-2 font-medium text-gray-200">@dvd.DvdNumber</h2>
-                    <h3 class="text-sm">@dvd.DateReleased</h3>
-                    <h3 class="text-sm">@dvd.StandardCharge</h3>
-                    <h3 class="text-sm">@dvd.PenaltyCharge</h3>
+                <img src="https://bulbfish.design/wp-content/uploads/2019/09/bulbfish-disc-jewel-box-mockup-BF-06.jpg" class="h-[10rem] w-[12rem] bg-gray-400">
+                <div class="flex flex-col gap-2">
+                    <h2 class="mt-2 font-medium text-gray-200">@dvd.DvdName</h2>
+                    <h3 class="text-sm">Date released: @dvd.DateReleased</h3>
+                    <h3 class="text-sm">Standard charge: @dvd.StandardCharge</h3>
+                    <h3 class="text-sm">Penalty charge: @dvd.PenaltyCharge</h3>
                 </div>
             </div>
         }

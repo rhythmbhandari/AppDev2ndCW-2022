@@ -1,7 +1,11 @@
 <div class="flex flex-col px-20 mt-16 w-full">
-    <div class="mt-16 w-full">
-        <div class="flex justify-end">
-            <a asp-controller="Loan" asp-action="AddLoan"><label for="membership" class="btn btn-primary modal-button">Loan a DVD</label></a>
+    <div class="mt-16 w-full mb-8">
+        <div class="flex justify-between">
+            <form class="flex gap-3">
+                <input type="number" name="copyNumber" placeholder="Search by copy number" class="input input-bordered bg-base-200"/>
+                <input type="submit" class="btn bg-gray-600" value="Search"/>
+            </form>
+            <a asp-controller="Loan" asp-action="AddLoan"><label for="membership" class="btn btn-primary">Loan a DVD</label></a>
         </div>
     </div>
     <div class="overflow-x-auto w-full mt-1">
@@ -10,42 +14,30 @@
             <!-- head -->
             <thead class="bg-gray-500">
             <tr class="bg-gray-500">
-                <th>Title</th>
-                <th>Copy number</th>
-                <th>Borrowed by</th>
-                <th>Due date</th>
-                <th>Penalty</th>
+                <th>Member Name</th>
+                <th>Dvd Name</th>
+                <th>Dvd Number</th>
+                <th>Dvd Copy Number</th>
+                <th>Date issued</th>
                 <th>Return</th>
             </tr>
             </thead>
             <tbody>
-            <!-- row 1 -->
-            <tr>
-                <th>Jack Oswald</th>
-                <td>123687123</td>
-                <td>12th April 2022</td>
-                <td>13th May 2022</td>
-                <td>$16</td>
-                <td><button class="btn btn-sm border-0 bg-primary">Return</button></td>
-            </tr>
-            <!-- row 2 -->
-            <tr>
-                <th>Jack Oswald</th>
-                <td>123687123</td>
-                <td>12th April 2022</td>
-                <td>13th May 2022</td>
-                <td>$16</td>
-                <td><button class="btn btn-sm border-0 bg-primary">Return</button></td>
-            </tr>
-            <tr>
-                <th>Jack Oswald</th>
-                <td>123687123</td>
-                <td>12th April 2022</td>
-                <td>13th May 2022</td>
-                <td>$16</td>
-                <td><button class="btn btn-sm border-0 bg-primary">Return</button></td>
-            </tr>
-    
+            
+            @if (ViewBag.loans is not null)
+            {
+                @foreach (var loan in ViewBag.loans)
+                {
+                    <tr>
+                        <th>@loan.memberName</th>
+                        <td>@loan.dvdName</td>
+                        <td>@loan.dvdTitleNumber</td>
+                        <td>@loan.dvdCopyNumber</td>
+                        <td>@loan.dateIssued</td>
+                        <td><a href="@Url.Action("ReturnLoan", "Loan", new{id = loan.loanId})" class="btn btn-sm border-0 bg-primary">Return</a></td>
+                    </tr>
+                }
+            }
             </tbody>
         </table>
     </div>

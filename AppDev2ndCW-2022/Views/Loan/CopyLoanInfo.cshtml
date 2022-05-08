@@ -1,0 +1,9 @@
+<div class="flex justify-center w-full">
+    <div action="/addLoanType" method="post" class="flex flex-col items-center gap-5 mt-16">
+        <h2 class="text-xl mb-3"><span>Dvd name: </span> @ViewBag.loans.dvdName </h2>
+        <h2 class="text-xl mb-3"><span>Last borrowed by: </span> @ViewBag.loans.memberName </h2>
+        <h2 class="text-xl mb-3"><span>Last date out: </span> @ViewBag.loans.dateReturned </h2>
+        <h2 class="text-xl mb-3"><span>Last date due: </span> @ViewBag.loans.dateDue </h2>
+        <h2 class="text-xl mb-3"><span>Last date returned: </span> @ViewBag.loans.dateOut </h2>
+    </div>
+</div>

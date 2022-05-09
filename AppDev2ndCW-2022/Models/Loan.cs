@@ -10,6 +10,8 @@ namespace AppDev2ndCW_2022.Models
         public long LoanTypeNumber { get; set; }
         public long CopyNumber { get; set; }
 
+        public string? status { get; set; }
+
         public long MemberNumber { get; set; }
         public DateTime DateOut { get; set; }
         public DateTime DateDue { get; set; }

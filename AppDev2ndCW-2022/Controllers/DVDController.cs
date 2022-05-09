@@ -1,6 +1,8 @@
 using AppDev2ndCW_2022.Models;
 using AppDev2ndCW_2022.ViewModel;
+using Coursework.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AppDev2ndCW_2022.Controllers;
 
@@ -208,5 +210,44 @@ public class DVDController : Controller
         var dvdTitle = dataBaseContext.DvdTitle.ToArray();
         ViewBag.dvdTitles = dvdTitle;
         return View("~/Views/Forms/AddDVDCopy.cshtml");
+    }
+
+    //Question 11
+    // Function for DVD copies on loan
+    // It shows Copies of DVD on loan
+    //[Authorize(Roles = "Manager, Assistant")]
+    //[Authorize]
+    [HttpGet]
+    public IActionResult DVDCopiesOnLoan()
+    {
+        List<DVDCopiesLoanDTO> dvdCopiesLoanDtos = new List<DVDCopiesLoanDTO>(); //DVDCopiesLoanDTO object
+        List<DvdTitle> dvdTitles = dataBaseContext.DvdTitle.ToList(); // converting data of dvd title to list
+        List<DvdCopy> dvdCopies = new List<DvdCopy>(); // DVD copy object
+        List<Loan> loans = new List<Loan>(); // Loan object
+        Member member = new Member(); // Member object
+        foreach (var dvdTitle in dvdTitles) // foreach loop to show dvd copies loan
+        {
+            dvdCopies = dataBaseContext.DvdCopy.Include(x => x.DvdTitle).Where(x => x.DvdTitle == dvdTitle).ToList();
+            foreach (var dvdCopy in dvdCopies)
+            {
+                loans = dataBaseContext.Loan.Include(x => x.DvdCopy).Include(x => x.Member).Where(x => x.DvdCopy == dvdCopy && x.status == "Loaned").ToList();
+                if (loans != null)
+                {
+                    foreach (var loan in loans)
+                    {
+                        member = dataBaseContext.Member.Where(x => x.MemberNumber == loan.Member.MemberNumber).First();
+                        DVDCopiesLoanDTO copiesLoanDto = new DVDCopiesLoanDTO();
+                        copiesLoanDto.dateOut = loan.DateOut;
+                        copiesLoanDto.title = dvdTitle.DvdName;
+                        copiesLoanDto.name = member.MemberFirstName + "" + member.MemberLastName;
+                        copiesLoanDto.copyNumber = dvdCopy.CopyNumber;
+                        dvdCopiesLoanDtos.Add(copiesLoanDto);
+                    }
+                }
+            }
+        }
+
+        dvdCopiesLoanDtos.OrderBy(x => x.dateOut).ThenBy(x => x.title);
+        return View(dvdCopiesLoanDtos);
     }
 }

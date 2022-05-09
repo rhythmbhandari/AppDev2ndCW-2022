@@ -1,116 +1,40 @@
 <div class="flex flex-col justify-start mt-16 w-full px-20">
     <div class="mt-16 w-full">
-                <div class="flex justify-between">
-                    <div class="flex bg-base-300 h-10 shadow-lg rounded-md cursor-pointer">
-                        <div class="px-6 py-2 text-white">
-                            <a asp-action="AllDvds" asp-controller="DVD">All Members</a>
-                        </div>
-                        <div class="px-6 py-2 text-gray-300">
-                            <a asp-action="Loaned" asp-controller="DVD">Loaned</a>
-                        </div>
-                        <div class="px-6 py-2 bg-primary rounded-r-md text-gray-300">
-                            <a asp-action="NotLoaned" asp-controller="DVD">Not Loaned</a>
-                        </div>
-                    </div>
-                    <div class="flex gap-3">
-                        <label for="membership" class="btn btn-primary modal-button">Add New DVD</label>
-                        <label for="membership" class="btn btn-primary bg-error border-0 hover: modal-button">Remove DVD</label>
-                    </div>
+        <div class="flex justify-between">
+            <div class="flex bg-base-300 h-10 shadow-lg rounded-md cursor-pointer">
+                <div class="px-6 py-2 text-white">
+                    <a asp-action="AllDvds" asp-controller="DVD">All DVDs</a>
+                </div>
+                <div class="px-6 py-2 text-gray-300">
+                    <a asp-action="Loaned" asp-controller="DVD">Loaned</a>
+                </div>
+                <div class="px-6 py-2 bg-primary rounded-r-md text-gray-300">
+                    <a asp-action="NotLoaned" asp-controller="DVD">Not Loaned in last 31 days</a>
                 </div>
             </div>
-            <div class="overflow-x-auto grid grid-cols-2 gap-8 justify-items-stretch w-full mt-4">
-    
-                <div class="py-4 flex gap-3">
-                    <div class="w-36 h-36 bg-primary"></div>
-                    <div class="flex flex-col gap-2">
-                        <h4>
-                            <span class="font-semibold text-gray-400">Title:</span>
-                            Muy neighbour totoro
-                        </h4>
-                        <h4>
-                            <span class="font-semibold text-gray-400">Producer:</span>
-                            Muy neighbour totoro
-                        </h4>
-                        <h4>
-                            <span class="font-semibold text-gray-400">Studio:</span>
-                            Muy neighbour totoro
-                        </h4>
-                        <h4>
-                            <span class="font-semibold text-gray-400">Actors:</span>
-                            <span>Hi,</span>
-                            <span>Hello,</span>
-                        </h4>
-                    </div>
-                </div>
-    
-                <div class="py-4 flex gap-3">
-                    <div class="w-36 h-36 bg-primary"></div>
-                    <div class="flex flex-col gap-2">
-                        <h4>
-                            <span class="font-semibold text-gray-400">Title:</span>
-                            Muy neighbour totoro
-                        </h4>
-                        <h4>
-                            <span class="font-semibold text-gray-400">Producer:</span>
-                            Muy neighbour totoro
-                        </h4>
-                        <h4>
-                            <span class="font-semibold text-gray-400">Studio:</span>
-                            Muy neighbour totoro
-                        </h4>
-                        <h4>
-                            <span class="font-semibold text-gray-400">Actors:</span>
-                            <span>Hi,</span>
-                            <span>Hello,</span>
-                        </h4>
-                    </div>
-                </div>
-    
-                <div class="py-4 flex gap-3">
-                    <div class="w-36 h-36 bg-primary"></div>
-                    <div class="flex flex-col gap-2">
-                        <h4>
-                            <span class="font-semibold text-gray-400">Title:</span>
-                            Muy neighbour totoro
-                        </h4>
-                        <h4>
-                            <span class="font-semibold text-gray-400">Producer:</span>
-                            Muy neighbour totoro
-                        </h4>
-                        <h4>
-                            <span class="font-semibold text-gray-400">Studio:</span>
-                            Muy neighbour totoro
-                        </h4>
-                        <h4>
-                            <span class="font-semibold text-gray-400">Actors:</span>
-                            <span>Hi,</span>
-                            <span>Hello,</span>
-                        </h4>
-                    </div>
-                </div>
-    
-                <div class="py-4 flex gap-3">
-                    <div class="w-36 h-36 bg-primary"></div>
-                    <div class="flex flex-col gap-2">
-                        <h4>
-                            <span class="font-semibold text-gray-400">Title:</span>
-                            Muy neighbour totoro
-                        </h4>
-                        <h4>
-                            <span class="font-semibold text-gray-400">Producer:</span>
-                            Muy neighbour totoro
-                        </h4>
-                        <h4>
-                            <span class="font-semibold text-gray-400">Studio:</span>
-                            Muy neighbour totoro
-                        </h4>
-                        <h4>
-                            <span class="font-semibold text-gray-400">Actors:</span>
-                            <span>Hi,</span>
-                            <span>Hello,</span>
-                        </h4>
-                    </div>
-                </div>
-    
+            <div class="flex gap-3">
+                <label for="membership" class="btn btn-primary modal-button">Add New DVD</label>
+                <label for="membership" class="btn btn-primary bg-error border-0 hover: modal-button">Remove DVD</label>
             </div>
+        </div>
+    </div>
+    <div class="overflow-x-auto grid grid-cols-2 gap-8 justify-items-stretch w-full mt-4">
+
+        @foreach (var dvd in ViewBag.dvds)
+        {
+            <div class="py-4 flex gap-3">
+                <img src="https://bulbfish.design/wp-content/uploads/2019/09/bulbfish-disc-jewel-box-mockup-BF-06.jpg" class="w-36 h-36"/>
+                <div class="flex flex-col gap-2">
+                    <h4>
+                        <span class="font-semibold text-gray-400">Title:</span>
+                        @dvd.dvdTitle
+                    </h4>
+                    <h4>
+                        <span class="font-semibold text-gray-400">Last date out:</span>
+                        @dvd.lastDateOut
+                    </h4>
+                </div>
+            </div>
+        }
+    </div>
 </div>

@@ -5,48 +5,48 @@
                 <a asp-action="AllMembers" asp-controller="Membership">All Members</a>
             </div>
             <div class="px-6 py-2 bg-primary rounded-r-md text-gray-200">
-                <a asp-action="NoLoans" asp-controller="Membership">Members with no loans</a>
+                <a asp-action="MembersWithNoLoans" asp-controller="Membership">Members with no loans</a>
             </div>
         </div>
     </div>
-    <div class="mt-16 w-full">
+    @*<div class="mt-16 w-full">
         <div class="flex justify-between">
             <input type="text" placeholder="Search by name or number" class="input bg-gray-600 w-[30rem] max-w-xs text-lg shadow-sm">
         </div>
-    </div>
+    </div>*@
+    @*@foreach (var member in ViewBag.members)
+    {
+        <h1>@member.memberName</h1>
+    }*@
     <div class="overflow-x-auto w-full mt-6">
         <table class="table table-zebra w-full">
             <!-- head -->
             <thead class="bg-gray-500">
             <tr class="bg-gray-500">
-                <th></th>
+                <th>Member id</th>
                 <th>Name</th>
-                <th>Job</th>
-                <th>Favorite Color</th>
+                <th>Address</th>
+                <th>Last dvd title</th>
+                <th>Last date out</th>
+                <th>Days since last loan</th>
             </tr>
             </thead>
             <tbody>
             <!-- row 1 -->
-            <tr>
-                <th>1</th>
-                <td>Cy Ganderton</td>
-                <td>Quality Control Specialist</td>
-                <td>Blue</td>
-            </tr>
-            <!-- row 2 -->
-            <tr>
-                <th>2</th>
-                <td>Hart Hagerty</td>
-                <td>Desktop Support Technician</td>
-                <td>Purple</td>
-            </tr>
-            <!-- row 3 -->
-            <tr>
-                <th>3</th>
-                <td>Brice Swyre</td>
-                <td>Tax Accountant</td>
-                <td>Red</td>
-            </tr>
+            @if (ViewBag.context is not null)
+            {
+                @foreach (var data in ViewBag.context)
+                {
+                    <tr>
+                        <th>@data.memberId</th>
+                        <td>@data.memberName</td>
+                        <td>@data.memberAddress</td>
+                        <th>@data.dateOut</th>
+                        <td>@data.dvdTitle</td>
+                        <td>@data.daysSinceLastLoan</td>
+                    </tr>
+                }
+            }
             </tbody>
         </table>
     </div>

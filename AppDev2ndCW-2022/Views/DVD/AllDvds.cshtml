@@ -25,7 +25,7 @@
                 <label x-on:click="DVD = !DVD" class="btn btn-primary modal-button">
                     <a asp-action="AddDvd" asp-controller="DVD">Add New DVD</a>
                 </label>
-                <label for="membership" class="btn btn-primary bg-error border-0 hover: modal-button">Remove DVD</label>
+                <a asp-action="RemoveDvdConfirmation" asp-controller="DVD" class="btn btn-primary bg-error border-0 hover: modal-button">Remove DVD</a>
             </div>
         </div>
     </div>

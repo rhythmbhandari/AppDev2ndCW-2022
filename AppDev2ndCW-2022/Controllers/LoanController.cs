@@ -102,9 +102,9 @@ public class LoanController : Controller
         var penaltyCharge = (from l in dataBaseContext.Loan
             join dc in dataBaseContext.DvdCopy on l.CopyNumber equals dc.CopyNumber
             join dt in dataBaseContext.DvdTitle on dc.DvdNumber equals dt.DvdNumber
-            where dt.DvdNumber == dc.DvdNumber && dc.CopyNumber == l.CopyNumber
+            where dc.CopyNumber == loan.CopyNumber
             select new
-            {
+            { 
                 penaltyCharge = dt.PenaltyCharge
             }).First();
         var totalPenalty = loan.DateReturned > loan.DateDue ? noOfDays * penaltyCharge.penaltyCharge : 0;

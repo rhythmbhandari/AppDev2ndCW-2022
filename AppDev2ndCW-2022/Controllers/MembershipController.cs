@@ -42,10 +42,10 @@ public class MembershipController: Controller
         return View();
     }
 
-    public IActionResult NoLoans()
+    /*public IActionResult NoLoans()
     {
         return View();
-    }
+    }*/
 
     public IActionResult MembershipDetails(int id)
     {
@@ -83,6 +83,50 @@ public class MembershipController: Controller
         var categories = dataBaseContext.MembershipCategory.ToArray();
         ViewBag.membershipCategories = categories;
         return View("~/Views/Forms/AddMembership.cshtml");
+    }
+    
+    public IActionResult MembersWithNoLoans()
+    {
+        List<NotLoanedViewModel> notLoanedViewModels = new List<NotLoanedViewModel>();
+        var members = (from m in dataBaseContext.Member
+            join l in dataBaseContext.Loan on m.MemberNumber equals l.MemberNumber
+            where l.DateOut < DateTime.Now.AddDays(-31)
+            select new
+            {
+                memberId = m.MemberNumber,
+                memberName = m.MemberFirstName + " " + m.MemberLastName,
+                memberAddress = m.MemberAddress,
+            }).Distinct().ToArray();
+        foreach (var member in members)
+        {
+            NotLoanedViewModel notLoanedViewModel = new NotLoanedViewModel();
+            notLoanedViewModel.memberName = member.memberName;
+            notLoanedViewModel.memberId = member.memberId;
+            notLoanedViewModel.memberAddress = member.memberAddress;
+
+            var lastLoan = (from l in dataBaseContext.Loan
+                join dc in dataBaseContext.DvdCopy on l.CopyNumber equals dc.CopyNumber
+                join dt in dataBaseContext.DvdTitle on dc.DvdNumber equals dt.DvdNumber
+                where l.MemberNumber == member.memberId
+                orderby l.DateOut descending
+                select new
+                {
+                    dvdName = dt.DvdName,
+                    daysSinceLastLoan = (DateTime.Now - l.DateOut).Days,
+                    dateOut = l.DateOut
+                }).ToArray()[0];
+            notLoanedViewModel.dvdTitle = lastLoan.dvdName;
+            notLoanedViewModel.dateOut = lastLoan.dateOut;
+            notLoanedViewModel.daysSinceLastLoan = lastLoan.daysSinceLastLoan;
+            notLoanedViewModels.Add(notLoanedViewModel);
+        }
+
+        notLoanedViewModels.Sort((x, y) => DateTime.Compare(x.dateOut, y.dateOut));
+        var distinct = notLoanedViewModels.Distinct().ToList();
+        ViewBag.context = distinct;
+        ViewBag.name = "ram";
+        ViewBag.members = members;
+        return View();
     }
     
     

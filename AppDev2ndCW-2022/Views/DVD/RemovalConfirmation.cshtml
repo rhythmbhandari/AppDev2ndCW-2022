@@ -1,0 +1,22 @@
+<div class="flex justify-center w-full">
+    <div class="flex flex-col items-center gap-4 mt-16">
+        @if (ViewBag.dvds is not null)
+        {
+            <h2 class="text-xl mb-4">
+                The following DVD copies will be removed. Do you wish to proceed?
+            </h2>
+            @foreach (var dvd in ViewBag.dvds)
+            {
+                <p class="mb-2">Title: @dvd.dvdTitle | Copy number: @dvd.dvdCopy  </p>
+            }
+            <a asp-action="RemoveDvds" asp-controller="DVD" class="btn btn-primary">Delete all</a>
+        }
+        @if (ViewBag.dvds is null)
+        {
+            <h2 class="text-xl mb-4">
+                No DVD copies older than 365 days
+            </h2>
+            <a asp-action="RemoveDvds" asp-controller="DVD" class="btn btn-primary">Delete all</a>
+        }
+    </div>
+</div>

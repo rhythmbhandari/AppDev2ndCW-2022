@@ -50,11 +50,22 @@ public class DVDController : Controller
 
     public IActionResult Loaned()
     {
+        var loansByDate = dataBaseContext.Loan.Count();
         return View();
     }
 
     public IActionResult NotLoaned()
     {
+        var context = (from l in dataBaseContext.Loan
+            join dc in dataBaseContext.DvdCopy on l.CopyNumber equals dc.CopyNumber
+            join dt in dataBaseContext.DvdTitle on dc.DvdNumber equals dt.DvdNumber
+            where l.DateOut < DateTime.Now.AddDays(-31)
+            select new 
+            {
+                dvdTitle = dt.DvdName,
+                lastDateOut = l.DateOut
+            }).Distinct().ToArray();
+        ViewBag.dvds = context;
         return View();
     }
 
@@ -109,6 +120,36 @@ public class DVDController : Controller
         ViewBag.producers = dataBaseContext.Producer.ToArray();
         return View("~/Views/Forms/AddDVD.cshtml");
     }
+    
+    /*Controller for removing DVDs older than a year*/
+    public IActionResult RemoveDvds()
+    {
+        var dvds = (from dc in dataBaseContext.DvdCopy
+            join l in dataBaseContext.Loan on dc.CopyNumber equals l.CopyNumber
+            where l.DateReturned != null && dc.DatePurchased.AddDays(365) < DateTime.Now
+            select dc).ToArray();
+        
+        dataBaseContext.Set<DvdCopy>().RemoveRange(dvds);
+        dataBaseContext.SaveChanges();
+        return View("RemovalSuccessful");
+    }
+    
+    public IActionResult RemoveDvdConfirmation()
+    {
+        var dvds = (from dc in dataBaseContext.DvdCopy
+            join l in dataBaseContext.Loan on dc.CopyNumber equals l.CopyNumber
+            join dt in dataBaseContext.DvdTitle on dc.DvdNumber equals dt.DvdNumber
+            where l.DateReturned != null && dc.DatePurchased.AddDays(365) < DateTime.Now
+            select new
+            {
+                dvdCopy = dc.CopyNumber,
+                dvdTitle = dt.DvdName,
+            });
+        ViewBag.check = DateTime.Now.AddDays(365);
+        ViewBag.dvds = dvds;
+        return View("RemovalConfirmation");
+    }
+    
     
     /*Controller for studio add form*/
     [Route("addStudio")]

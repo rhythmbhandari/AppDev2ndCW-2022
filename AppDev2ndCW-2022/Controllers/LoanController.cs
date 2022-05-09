@@ -14,6 +14,7 @@ public class LoanController : Controller
     }
     // GET
     
+    //Question number 7 and 5.
     [Authorize]
     public IActionResult Index(int? copyNumber)
     {
@@ -53,8 +54,8 @@ public class LoanController : Controller
         return View();
     }
 
-    [Route("addLoanType")]
     [Authorize]
+    [Route("addLoanType")]
     [AcceptVerbs("Get", "Post")]
     public IActionResult AddLoanType(LoanTypes loanTypes)
     {
@@ -71,8 +72,8 @@ public class LoanController : Controller
     
     
     [HttpPost]
-    
     [Authorize]
+    //Question number 6
     public IActionResult AddLoan(Loan loan)
     {
         var member = dataBaseContext.Member.Single(x => x.MemberNumber == loan.MemberNumber);
@@ -159,6 +160,7 @@ public class LoanController : Controller
 
     
     
+
     [Authorize]
     public IActionResult ReturnLoan(int id)
     {

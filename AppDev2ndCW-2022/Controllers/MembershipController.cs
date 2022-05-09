@@ -18,6 +18,7 @@ public class MembershipController: Controller
     }
 
     
+    //Question number 8
     [Authorize]
     public IActionResult AllMembers()
     {
@@ -44,13 +45,8 @@ public class MembershipController: Controller
         ViewBag.members = membersList;
         return View();
     }
-
-    /*public IActionResult NoLoans()
-    {
-        return View();
-    }*/
-
     
+    //Question number 3
     [Authorize]
     public IActionResult MembershipDetails(int id)
     {
@@ -93,6 +89,7 @@ public class MembershipController: Controller
     }
     
     
+    //Question number 12
     [Authorize]
     public IActionResult MembersWithNoLoans()
     {
@@ -137,7 +134,6 @@ public class MembershipController: Controller
         ViewBag.members = members;
         return View();
     }
-    
     
     [Authorize]
     [Route("addMembershipCategory")]

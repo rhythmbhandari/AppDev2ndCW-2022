@@ -22,7 +22,8 @@ namespace AppDev2ndCW_2022.Controllers
             dataBaseContext = db;
         }
         
-        [Authorize]
+
+        //Homepage - Search bar | Question no 1 and Question no 2
         public IActionResult Index(String actor, String radio, bool IsLogout = false)
         {
             if (actor == null)
@@ -89,6 +90,7 @@ namespace AppDev2ndCW_2022.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login(string email, string contact, string ReturnUrl)

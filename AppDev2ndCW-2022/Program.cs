@@ -1,11 +1,22 @@
 using System.Reflection;
 using AppDev2ndCW_2022.Models;
+using AppDev2ndCW_2022.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<UserService, UserService>();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
+    options =>
+    {
+        options.LoginPath = "/login:";
+    }
+);
 
 builder.Services.AddDbContext<DataBaseContext>(options =>
 {

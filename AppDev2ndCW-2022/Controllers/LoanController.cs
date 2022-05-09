@@ -1,4 +1,5 @@
 using AppDev2ndCW_2022.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AppDev2ndCW_2022.Controllers;
@@ -12,6 +13,8 @@ public class LoanController : Controller
         dataBaseContext = db;
     }
     // GET
+    
+    [Authorize]
     public IActionResult Index(int? copyNumber)
     {
         if (copyNumber is not null)
@@ -51,6 +54,7 @@ public class LoanController : Controller
     }
 
     [Route("addLoanType")]
+    [Authorize]
     [AcceptVerbs("Get", "Post")]
     public IActionResult AddLoanType(LoanTypes loanTypes)
     {
@@ -67,6 +71,8 @@ public class LoanController : Controller
     
     
     [HttpPost]
+    
+    [Authorize]
     public IActionResult AddLoan(Loan loan)
     {
         var member = dataBaseContext.Member.Single(x => x.MemberNumber == loan.MemberNumber);
@@ -132,6 +138,7 @@ public class LoanController : Controller
     }
     
     [HttpGet]
+    [Authorize]
     public IActionResult AddLoan()
     {
         var loanType = dataBaseContext.LoanTypes.ToArray();
@@ -150,6 +157,9 @@ public class LoanController : Controller
         return View("~/Views/Forms/AddLoan.cshtml");
     }
 
+    
+    
+    [Authorize]
     public IActionResult ReturnLoan(int id)
     {
         var loan = dataBaseContext.Loan.Single(x => x.LoanNumber == id);

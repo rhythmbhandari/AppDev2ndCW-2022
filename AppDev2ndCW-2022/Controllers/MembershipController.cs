@@ -1,5 +1,6 @@
 using AppDev2ndCW_2022.Models;
 using AppDev2ndCW_2022.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AppDev2ndCW_2022.Controllers;
@@ -16,6 +17,8 @@ public class MembershipController: Controller
         _logger = logger;
     }
 
+    
+    [Authorize]
     public IActionResult AllMembers()
     {
         var members = dataBaseContext.Member.ToArray();
@@ -47,6 +50,8 @@ public class MembershipController: Controller
         return View();
     }*/
 
+    
+    [Authorize]
     public IActionResult MembershipDetails(int id)
     {
         var member = dataBaseContext.Member.Single(m => m.MemberNumber == id);
@@ -70,6 +75,7 @@ public class MembershipController: Controller
     }
 
     [HttpPost]
+    [Authorize]
     public IActionResult AddMembership(Member member)
     {
         dataBaseContext.Member.Add(member);
@@ -78,6 +84,7 @@ public class MembershipController: Controller
     }
 
     [HttpGet]
+    [Authorize]
     public IActionResult AddMembership()
     {
         var categories = dataBaseContext.MembershipCategory.ToArray();
@@ -85,6 +92,8 @@ public class MembershipController: Controller
         return View("~/Views/Forms/AddMembership.cshtml");
     }
     
+    
+    [Authorize]
     public IActionResult MembersWithNoLoans()
     {
         List<NotLoanedViewModel> notLoanedViewModels = new List<NotLoanedViewModel>();
@@ -130,6 +139,7 @@ public class MembershipController: Controller
     }
     
     
+    [Authorize]
     [Route("addMembershipCategory")]
     [AcceptVerbs("Get", "Post")]
     public IActionResult AddMembershipCategory(MembershipViewModel viewModel)

@@ -1,0 +1,84 @@
+@model AppDev2ndCW_2022.ViewModel.DvdViewModel
+<div class="flex justify-center w-full h-full mt-10">
+    <form action="/DVD/AddDvd" method="post" class="flex flex-col items-center gap-2 w-full">
+        <h2 class="text-xl mb-4">Add new DVD</h2>
+        <div class="form-control mb-4">
+            <label asp-for="DvdName" class="text-sm mb-1" for="studio">Dvd Name</label>
+            <input asp-for="DvdName" type="text" class="input bg-base-200 input-bordered w-[35rem]"/>
+        </div>
+        <div class="form-control">
+            <label asp-for="StudioNum" class="text-sm mb-1" for="studio">Studio</label>
+            <select asp-for="StudioNum" id="studio" class="select bg-base-200 input-bordered w-[35rem]">
+                <option disabled selected value="null">Select a studio</option>
+                @if (ViewBag.studios is not null)
+                {
+                    @foreach (var studio in ViewBag.studios)
+                    {
+                        <option value="@studio.StudioNumber">@studio.StudioName</option>
+                    }
+                }
+            </select>
+            <a asp-action="AddStudio" asp-controller="DVD" class="self-end hover:cursor-pointer"><label class="label-text-alt font-semibold text-blue-400">Add new Studio</label></a>
+        </div>
+        <div class="form-control">
+            <label asp-for="ProducerNum" class="text-sm mb-1" for="producer">Producer</label>
+            <select asp-for="ProducerNum" id="producer" class="select w-[35rem] bg-base-200 input-bordered">
+                <option disabled selected value="null">Select a producer</option>
+                @if (ViewBag.studios is not null){
+                @foreach (var producer in ViewBag.producers)
+                    {
+                        <option value="@producer.ProducerNumber">@producer.ProducerName</option>
+                    }
+                }
+            </select>
+            <a asp-action="AddProducer" asp-controller="DVD" class="self-end hover:cursor-pointer"><label class="label-text-alt font-semibold text-blue-400">Add new Producer</label></a>
+        </div>
+        <div class="form-control flex flex-col items-start">
+            <label class="text-sm mb-1 flex justify-between items-end w-[35rem]" for="studio">
+                <span>Cast Member</span>
+                <span class="text-xs">Hold ctrl/command to select multiple</span>
+            </label>
+            <select name="castMembers" class="select w-[35rem] bg-base-200 input-bordered h-[10rem] p-0 m-0" multiple="multiple">
+                <option none value="null" class="h-8 pl-4 bg-opacity-25 flex items-center w-full">None</option>
+                @if (ViewBag.actors is not null)
+                {
+                    @foreach (var actor in ViewBag.actors)
+                    {
+                        <option value="@actor.ActorNumber" class="h-8 flex pl-4 items-center w-full">@actor.ActorSurname @actor.ActorFirstName</option>
+                    }
+                }
+            </select>
+            <a class="self-end" asp-action="AddActor" asp-controller="DVD"><label class="label-text-alt hover:cursor-pointer font-semibold text-blue-400">Add new Actor</label></a>
+        </div>
+        <div class="form-control">
+            <label asp-for="CategoryNum" class="text-sm mb-1">Category</label>
+            <select asp-for="CategoryNum" id="category" class="select w-[35rem] bg-base-200 input-bordered">
+                <option disabled selected value="null">Select a Category</option>
+                @if (ViewBag.categories is not null){
+                @foreach (var category in ViewBag.categories)
+                    {
+                        <option value="@category.CategoryNumber">@category.CategoryDescription</option>
+                    }
+                }
+            </select>
+            <a asp-action="AddCategory" asp-controller="DVD" class="self-end hover:cursor-pointer"><label class="label-text-alt font-semibold text-blue-400">Add new Category</label></a>
+        </div>
+        <div class="flex flex-col gap-7">
+            <div class="form-control">
+                <label asp-for="DatePosted" class="text-sm mb-1" for="studio">Date released</label>
+                <input asp-for="DatePosted" type="date" class="input bg-base-200 input-bordered w-[35rem]"/>
+            </div>
+            <div class="form-control">
+                <label asp-for="StandardCharge" class="text-sm mb-1" for="studio">Standard Charge ($)</label>
+                <input asp-for="StandardCharge" type="number" class="input bg-base-200 input-bordered w-[35rem]"/>
+            </div>
+            <div class="form-control">
+                <label asp-for="PenaltyCharge" class="text-sm mb-1" for="studio">Penalty Charge ($)</label>
+                <input asp-for="PenaltyCharge" type="number" class="input bg-base-200 input-bordered w-[35rem]"/>
+            </div>
+            <div class="form-control mb-10">
+                <input type="submit" class="bg-black btn w-[35rem]" value="Add DVD"/>
+            </div>
+        </div>
+    </form>
+</div>

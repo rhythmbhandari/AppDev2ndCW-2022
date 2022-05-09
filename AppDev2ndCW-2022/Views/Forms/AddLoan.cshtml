@@ -1,0 +1,69 @@
+@model Loan
+@if (TempData["Message"] is not null)
+{
+    <div x-data="{showMessage: true}" x-transition x-show="showMessage" x-init="setTimeout(() => showMessage = false, 3000)" class="alert absolute flex justify-center items-center rounded-lg top-3 bg-red-400 left-[38%] px-10 w-96 shadow-lg">
+        <div class="flex justify-center items-center">
+            <span class="text-red-800">@TempData["Message"]</span>
+        </div>
+    </div>
+}
+<div class="flex justify-center w-full h-full mt-10">
+    <form action="/Loan/AddLoan" method="post" class="flex flex-col items-center gap-2 w-full">
+        <h2 class="text-xl mb-4">Add new loan</h2>
+        <div class="form-control">
+            <label asp-for="LoanTypeNumber" class="text-sm mb-1" for="studio">Type of loan</label>
+            <select asp-for="LoanTypeNumber" id="LoanTypeNumber" class="select bg-base-200 input-bordered w-[35rem]">
+                <option disabled selected value="null">Select a type</option>
+                @if (ViewBag.loanTypes is not null)
+                {
+                    @foreach (var loanType in ViewBag.loanTypes)
+                    {
+                        <option value="@loanType.LoanTypeNumber">@loanType.LoanType</option>
+                    }
+                }
+            </select>
+            <a asp-action="AddLoanType" asp-controller="Loan" class="self-end hover:cursor-pointer"><label class="label-text-alt font-semibold text-blue-400">Add new loan type</label></a>
+        </div>
+        <div class="form-control">
+            <label asp-for="CopyNumber" class="text-sm mb-1" for="studio">Dvd copy number</label>
+            <select asp-for="CopyNumber" id="LoanTypeNumber" class="select bg-base-200 input-bordered w-[35rem]">
+                <option disabled selected value="null">Select a dvd copy</option>
+                @if (ViewBag.copyNumbers is not null)
+                {
+                    @foreach (var copyNumber in ViewBag.copyNumbers)
+                    {
+                        <option value="@copyNumber.CopyNumber">@copyNumber.DvdLoanTitle</option>
+                    }
+                }
+            </select>
+            <a asp-action="AddDvdCopy" asp-controller="DVD" class="self-end hover:cursor-pointer"><label class="label-text-alt font-semibold text-blue-400">Add new dvd copy</label></a>
+        </div>
+        <div class="form-control">
+            <label asp-for="MemberNumber" class="text-sm mb-1" for="studio">Member Name</label>
+            <select asp-for="MemberNumber" id="LoanTypeNumber" class="select bg-base-200 input-bordered w-[35rem]">
+                <option disabled selected value="null">Select a member</option>
+                @if (ViewBag.memberships is not null)
+                {
+                    @foreach (var membership in ViewBag.memberships)
+                    {
+                        <option value="@membership.MemberNumber">@membership.MemberFirstName @membership.MemberLastName</option>
+                    }
+                }
+            </select>
+            <a asp-action="AddMembership" asp-controller="Membership" class="self-end hover:cursor-pointer"><label class="label-text-alt font-semibold text-blue-400">Add new member</label></a>
+        </div>
+        <div class="flex flex-col gap-7">
+            <div class="form-control">
+                <label asp-for="DateOut" class="text-sm mb-1" for="DateOut">Date out</label>
+                <input asp-for="DateOut" type="date" class="input bg-base-200 input-bordered w-[35rem]"/>
+            </div>
+            <div class="form-control">
+                <label asp-for="DateDue" class="text-sm mb-1" for="DateDue">Date due</label>
+                <input asp-for="DateDue" type="date" class="input bg-base-200 input-bordered w-[35rem]"/>
+            </div>
+            <div class="form-control mb-10">
+                <input type="submit" class="bg-black btn w-[35rem]" value="Add Loan"/>
+            </div>
+        </div>
+    </form>
+</div>

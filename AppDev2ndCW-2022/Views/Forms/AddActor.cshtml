@@ -1,0 +1,17 @@
+@model Actor
+<div class="flex justify-center w-full">
+    <form action="/addActor" method="post" class="flex flex-col items-center gap-4 mt-16">
+        <h2 class="text-xl mb-3">Add a new actor</h2>
+        <div class="form-control">
+            <label asp-for="ActorFirstName" class="text-sm">First name</label>
+            <input id="firstName" asp-for="ActorFirstName" type="text" placeholder="First name" class="input input-bordered w-[30rem]">
+        </div>
+        <div class="form-control">
+            <label asp-for="ActorSurname" class="text-sm">Last name</label>
+            <input id="lastName" asp-for="ActorSurname" type="text" placeholder="Last name" class="input input-bordered w-[30rem]">
+        </div>
+        <div class="form-control">
+            <input type="submit" class="btn bg-black w-[30rem]"/>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,13 @@
+@model Studio
+<div class="flex justify-center w-full">
+    <form action="/addStudio" method="post" class="flex flex-col items-center gap-5 mt-16">
+        <h2 class="text-xl mb-3">Add a new Studio</h2>
+        <div class="form-control">
+            <label asp-for="StudioName" class="text-sm">Studio name</label>
+            <input asp-for="StudioName" id="StudioName" name="StudioName" type="text" placeholder="Eg: 21st century fox" class="input input-bordered w-[30rem]">
+        </div>
+        <div class="form-control">
+            <input type="submit" class="btn bg-black w-[30rem]" value="Add Studio"/>
+        </div>
+    </form>
+</div>

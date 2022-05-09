@@ -13,6 +13,6 @@ namespace AppDev2ndCW_2022.Models
         public DateTime DatePurchased { get; set; }
 
         [ForeignKey("DvdNumber")]
-        public DvdTitle DvdTitle { get; set; }
+        public DvdTitle? DvdTitle { get; set; }
     }
 }

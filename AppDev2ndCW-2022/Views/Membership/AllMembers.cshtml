@@ -1,0 +1,50 @@
+<div class="flex flex-col w-full px-20 mt-32">
+    <div class="flex justify-between">
+        <div class="flex bg-base-300 shadow-lg rounded-md cursor-pointer">
+            <div class="px-6 flex justify-center items-center py-2 bg-primary rounded-l-md text-white">
+                <a asp-action="AllMembers" asp-controller="Membership">All Members</a>
+            </div>
+            <div class="px-6 py-2 flex justify-center items-center text-gray-200">
+                <a asp-action="MembersWithNoLoans" asp-controller="Membership">Members with no loans</a>
+            </div>
+        </div>
+        <div class="flex justify-end">
+            <a asp-action="AddMembership" asp-controller="Membership"><button class="btn btn-active btn-primary">Add Membership</button></a>
+        </div>
+    </div>
+    <div class="overflow-x-auto w-full mt-6">
+        <table class="table table-zebra w-full">
+            <!-- head -->
+            <thead class="bg-gray-500">
+            <tr class="bg-gray-500">
+                <th>Name</th>
+                <th>Membership category number</th>
+                <th>Current loan count</th>
+                <th>Remarks</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- row 1 -->
+            @if (ViewBag.members is not null)
+            {
+                @foreach (var member in ViewBag.members)
+                {
+                    <tr>
+                    <th><a href="@Url.Action("MembershipDetails", "Membership", new{id = @member.member.MemberNumber})" class="hover:text-underline cursor-pointer hover:font-bold">@member.member.MemberFirstName @member.member.MemberLastName</a></th>
+                        <td>@member.member.MembershipCategoryNumber</td>
+                        <td>@member.count</td>
+                        @if (member.totalAllowedLoans < member.count)
+                        {
+                            <td>Too many DVDs</td>
+                        }
+                        @if (member.totalAllowedLoans > member.count)
+                        {
+                            <td>Okay</td>
+                        }
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

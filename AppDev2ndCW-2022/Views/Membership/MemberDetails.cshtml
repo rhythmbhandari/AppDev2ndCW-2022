@@ -1,0 +1,18 @@
+<div class="flex justify-center w-full">
+    <div class="flex flex-col items-center gap-5 mt-16">
+        <h2 class="text-xl mb-3">Member loan details for @ViewBag.firstName @ViewBag.lastName</h2>
+        @foreach (var data in ViewBag.contextData)
+        {
+            <div class="px-10 py-5 mb-2 bg-gray-500 rounded-lg">
+                <p>Dvd title number: @data.dvdTitle</p>
+                <p>Dvd copy number: @data.dvdCopy</p>
+                <p>Borrowed date: @data.dvdBorrowedDate</p>
+                <p>Return date: @data.dvdReturnDate</p>
+                <p>Total Loans: @data.totalLoans</p>
+            </div>
+        }
+        <div class="form-control">
+            <a type="submit" class="btn bg-black w-[30rem]" value="Back to membership">Back to membership</a>
+        </div>
+    </div>
+</div>

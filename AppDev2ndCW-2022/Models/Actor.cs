@@ -7,8 +7,8 @@ namespace AppDev2ndCW_2022.Models
     {
         [Key]
         public long ActorNumber { get; set; }
-        public string ActorSurname { get; set; }
-        public string ActorFirstName { get; set; }
+        public string? ActorSurname { get; set; }
+        public string? ActorFirstName { get; set; }
 
     }
 }

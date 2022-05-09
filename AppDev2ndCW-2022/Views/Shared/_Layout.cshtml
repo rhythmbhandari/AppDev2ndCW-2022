@@ -29,8 +29,13 @@
             </div>
         </nav>
     </header>
-    <main class="flex justify-center h-[45rem]">
-        @RenderBody()
-    </main>
+<main class="flex justify-center h-[45rem]">
+    @RenderBody()
+</main>
+<script>
+    const form = document.getElementById("loanedDateFilter");
+    const picker = document.getElementById("loanedDatePicker");
+    picker.addEventListener("blur", () => form.submit());
+</script>
 </body>
 </html>

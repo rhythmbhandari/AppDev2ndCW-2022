@@ -32,7 +32,7 @@ namespace AppDev2ndCW_2022.Controllers
                     {
                         DvdName = t.DvdName,
                         DvdNumber = c.DvdNumber,
-                        DateReleased = t.DateReleased,
+                        DateReleased = t.DateReleased.ToString("dd/MM/yyyy"),
                         StandardCharge = t.StandardCharge,
                         PenaltyCharge = t.PenaltyCharge,
                     }).ToArray();
@@ -50,7 +50,7 @@ namespace AppDev2ndCW_2022.Controllers
                     {
                         DvdName = t.DvdName,
                         DvdNumber = c.DvdNumber,
-                        DateReleased = t.DateReleased,
+                        DateReleased = t.DateReleased.ToString("dd/MM/yyyy"),
                         StandardCharge = t.StandardCharge,
                         PenaltyCharge = t.PenaltyCharge,
                     }).ToArray();

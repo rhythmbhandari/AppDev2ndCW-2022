@@ -1,4 +1,12 @@
 @model Loan
+@if (TempData["Message"] is not null)
+{
+    <div x-data="{showMessage: true}" x-transition x-show="showMessage" x-init="setTimeout(() => showMessage = false, 3000)" class="alert absolute flex justify-center items-center rounded-lg top-3 bg-red-400 left-[38%] px-10 w-96 shadow-lg">
+        <div class="flex justify-center items-center">
+            <span class="text-red-800">@TempData["Message"]</span>
+        </div>
+    </div>
+}
 <div class="flex justify-center w-full h-full mt-10">
     <form action="/Loan/AddLoan" method="post" class="flex flex-col items-center gap-2 w-full">
         <h2 class="text-xl mb-4">Add new loan</h2>
@@ -52,10 +60,6 @@
             <div class="form-control">
                 <label asp-for="DateDue" class="text-sm mb-1" for="DateDue">Date due</label>
                 <input asp-for="DateDue" type="date" class="input bg-base-200 input-bordered w-[35rem]"/>
-            </div>
-            <div class="form-control">
-                <label asp-for="DateReturned" class="text-sm mb-1" for="DateOut">Date returned</label>
-                <input asp-for="DateReturned" type="date" class="input bg-base-200 input-bordered w-[35rem]"/>
             </div>
             <div class="form-control mb-10">
                 <input type="submit" class="bg-black btn w-[35rem]" value="Add Loan"/>

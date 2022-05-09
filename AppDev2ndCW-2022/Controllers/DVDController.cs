@@ -48,9 +48,47 @@ public class DVDController : Controller
         return View();
     }
 
-    public IActionResult Loaned()
+    public IActionResult Loaned(DateTime? date)
     {
-        var loansByDate = dataBaseContext.Loan.Count();
+        if(date is not null)
+        {
+            var loansByDate = (from l in dataBaseContext.Loan
+                join m in dataBaseContext.Member on l.MemberNumber equals m.MemberNumber
+                join dc in dataBaseContext.DvdCopy on l.CopyNumber equals dc.CopyNumber
+                join dt in dataBaseContext.DvdTitle on dc.DvdNumber equals dt.DvdNumber
+                where l.DateReturned == null && l.DateOut == date
+                orderby l.DateOut
+                select new
+                {
+                    dvdTitle = dt.DvdName,
+                    memberName = m.MemberFirstName + " " + m.MemberLastName,
+                    copyNumber = dc.CopyNumber,
+                    totalPerDay = dataBaseContext.Loan.Count(x => x.DateOut.Date == l.DateOut && x.DateReturned == null),
+                    dateOut = l.DateOut.ToString("dd/MM/yyyy"),
+                });
+            ViewBag.loans = loansByDate;
+            return View();
+        }
+        else if (date is null)
+        {
+            var loansByDate = (from l in dataBaseContext.Loan
+                join m in dataBaseContext.Member on l.MemberNumber equals m.MemberNumber
+                join dc in dataBaseContext.DvdCopy on l.CopyNumber equals dc.CopyNumber
+                join dt in dataBaseContext.DvdTitle on dc.DvdNumber equals dt.DvdNumber
+                where l.DateReturned == null
+                orderby l.DateOut
+                select new
+                {
+                    dvdTitle = dt.DvdName,
+                    memberName = m.MemberFirstName + " " + m.MemberLastName,
+                    copyNumber = dc.CopyNumber,
+                    totalPerDay = dataBaseContext.Loan.Count(x => x.DateOut.Date == l.DateOut && x.DateReturned == null),
+                    dateOut = l.DateOut.ToString("dd/MM/yyyy"),
+                });
+            ViewBag.loans = loansByDate;
+            return View();
+        }
+
         return View();
     }
 
@@ -63,11 +101,18 @@ public class DVDController : Controller
             select new 
             {
                 dvdTitle = dt.DvdName,
-                lastDateOut = l.DateOut
+                lastDateOut = l.DateOut.ToString("dd/MM/yyyy"),
             }).Distinct().ToArray();
         ViewBag.dvds = context;
         return View();
     }
+
+    /*public IActionResult FilterByDate(DateTime? date)
+    
+
+        TempData["Message"] = "No data found.";
+        return Redirect("Loaned");
+    }*/
 
     /*Controller for actor add form*/
     [Route("addActor")]

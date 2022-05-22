@@ -135,9 +135,10 @@ public class MembershipController: Controller
         return View();
     }
     
-    [Authorize]
+
     [Route("addMembershipCategory")]
     [AcceptVerbs("Get", "Post")]
+    [Authorize]
     public IActionResult AddMembershipCategory(MembershipViewModel viewModel)
     {
         if (Request.Method == "POST")

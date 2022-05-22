@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AppDev2ndCW_2022.Configuration;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace AppDev2ndCW_2022.Models
 {
-    public class DataBaseContext : DbContext
+    public class DataBaseContext : IdentityDbContext<User>
     {
         // as per the entity framework this code insures if the database had been created or not, plus if not created it creates automatically
         // and DB context has also been implemented in sartup.cs
@@ -41,6 +43,8 @@ namespace AppDev2ndCW_2022.Models
                 table.DvdNumber,
                 table.ActorNumber
             });
+            base.OnModelCreating(builder);
+            builder.ApplyConfiguration(new RoleConfiguration());
         }
     }
    

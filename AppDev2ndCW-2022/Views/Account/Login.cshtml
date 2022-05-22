@@ -1,0 +1,31 @@
+@model AppDev2ndCW_2022.ViewModel.UserLoginViewModel;
+@{ 
+     var returnUrl = ViewData["ReturnUrl"] as string;
+     var error = TempData["Error"] as string;
+}
+@if (TempData["Message"] is not null)
+{
+    <div x-data="{showMessage: true}" x-transition x-show="showMessage" x-init="setTimeout(() => showMessage = false, 3000)" class="alert absolute flex justify-center items-center rounded-lg top-3 bg-green-400 left-[38%] px-10 w-96 shadow-lg">
+        <div class="flex justify-center items-center">
+            <span class="text-green-800">@TempData["Message"]</span>
+        </div>
+    </div>
+}
+<div class="flex justify-center w-full">
+    <form action="/Account/Login" method="post" class="flex flex-col items-center gap-4 mt-16">
+        <h2 class="text-xl mb-3">Login</h2>
+        <div class="form-control">
+            <label for="email" class="text-sm">Email</label>
+            <input asp-for="Email" id="email" name="email" type="text" placeholder="Email" class="input input-bordered w-[30rem]">
+            <span asp-validation-for="Email" class="text-red-400 text-sm"></span>
+        </div>
+        <div class="form-control">
+            <label for="contact" class="text-sm">Password</label>
+            <input asp-for="Password" id="contact" name="password" type="Password" placeholder="Password" class="input input-bordered w-[30rem]">
+            <span asp-validation-for="Password" class="text-red-400 text-sm"></span>
+        </div>
+        <div class="form-control">
+            <input type="submit" class="btn bg-black w-[30rem]" value="login"/>
+        </div>
+    </form>
+</div>

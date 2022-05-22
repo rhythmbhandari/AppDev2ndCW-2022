@@ -54,9 +54,10 @@ public class LoanController : Controller
         return View();
     }
 
-    [Authorize]
+
     [Route("addLoanType")]
     [AcceptVerbs("Get", "Post")]
+    [Authorize]
     public IActionResult AddLoanType(LoanTypes loanTypes)
     {
         if (Request.Method == "POST")
@@ -157,9 +158,6 @@ public class LoanController : Controller
         ViewBag.loanTypes = loanType;
         return View("~/Views/Forms/AddLoan.cshtml");
     }
-
-    
-    
 
     [Authorize]
     public IActionResult ReturnLoan(int id)

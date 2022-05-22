@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
-using AppDev2ndCW_2022.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -13,11 +12,9 @@ namespace AppDev2ndCW_2022.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         public readonly DataBaseContext dataBaseContext;
-        public readonly UserService _UserService;
 
-        public HomeController(ILogger<HomeController> logger, DataBaseContext db, UserService userService)
+        public HomeController(ILogger<HomeController> logger, DataBaseContext db)
         {
-            _UserService = userService;
             _logger = logger;
             dataBaseContext = db;
         }
@@ -73,62 +70,6 @@ namespace AppDev2ndCW_2022.Controllers
         {
             return View();
         }
-        
-        [HttpGet]
-        [Route("login")]
-        public IActionResult Login(string ReturnUrl)
-        {
-            ViewData["ReturnUrl"] = ReturnUrl;
-            /*if (Login == admin)
-            {
-                return RedirectToAction("Home", "Admin");
-            }
-            else
-            {
-                return RedirectToAction("Home", "Users");
-            }*/
-            return View();
-        }
-
-        [Authorize]
-        [HttpPost]
-        [Route("login")]
-        public async Task<IActionResult> Login(string email, string contact, string ReturnUrl)
-        {
-            //login functionality
-            ViewData["ReturnUrl"] = ReturnUrl;
-
-            if (_UserService.TryValidateUser(email,contact, out List<Claim> claims))
-            {
-                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-
-                await HttpContext.SignInAsync(claimsPrincipal);
-                if (ReturnUrl != null)
-                {
-                    return Redirect(ReturnUrl);
-                }
-                else
-                {
-                    return RedirectToAction("Privacy", "Home", new { IsLogin = true });
-                }
-            }
-            else
-            {
-                TempData["Error"] = "Invalid username or password";
-                return Redirect("/");
-            }
-        }
-
-
-        [Authorize]
-        [Route("logout")]
-        public async Task<IActionResult> Logout()
-        {
-            await HttpContext.SignOutAsync();
-            return Redirect("/login");
-        }
-
 
         public IActionResult SearchResult()
         {

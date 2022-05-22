@@ -1,0 +1,38 @@
+@using AppDev2ndCW_2022.ViewModel
+@model AppDev2ndCW_2022.ViewModel.UserRegistrationViewModel
+<div class="flex justify-center w-full">
+    <form action="/Account/Register" method="post" class="flex flex-col items-center gap-6 mt-16">
+        <h2 class="text-xl mb-3">Add a new user</h2>
+        <div class="form-control">
+            <label class="text-sm">Email</label>
+            <input asp-for="Email" id="email" type="email" placeholder="Email" class="input input-bordered w-[30rem]">
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-sm text-red-400" })
+        </div>
+        <div class="form-control">
+            <label class="text-sm">Full Name</label>
+            <input asp-for="Name" id="lastName" type="text" placeholder="Full name" class="input input-bordered w-[30rem]">
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-sm text-red-400" })
+        </div>
+        <div class="form-control">
+            <label class="text-sm">Password</label>
+            <input asp-for="Password" id="password" type="text" placeholder="password" class="input input-bordered w-[30rem]">
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-sm text-red-400" })
+        </div>
+        <div class="form-control">
+            <label class="text-sm">Confirm Password</label>
+            <input asp-for="ConfirmPassword" id="confirmPassword" type="password" placeholder="Last name" class="input input-bordered w-[30rem]">
+            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-sm text-red-400" })
+        </div>
+        <div class="form-control">
+            <label class="text-sm">Type</label>
+            <select asp-for="Type" id="password" type="text" placeholder="Last name" class="select select-bordered w-[30rem]">
+                <option selected value="Manager">Manager</option>
+                <option value="Admin">Admin</option>
+            </select>
+            @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-sm text-red-400" })
+        </div>
+        <div class="form-control">
+            <input type="submit" class="btn bg-black w-[30rem]"/>
+        </div>
+    </form>
+</div>

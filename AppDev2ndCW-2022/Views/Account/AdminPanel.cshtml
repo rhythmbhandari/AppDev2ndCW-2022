@@ -1,0 +1,40 @@
+@if (ViewBag.message is not null)
+{
+    <div x-data="{showMessage: true}" x-transition x-show="showMessage" x-init="setTimeout(() => showMessage = false, 3000)" class="alert absolute flex justify-center items-center rounded-lg top-3 bg-red-400 left-[38%] px-10 w-96 shadow-lg">
+        <div class="flex justify-center items-center">
+            <span class="text-red-800">@ViewBag.message</span>
+        </div>
+    </div>
+}
+<div class="flex flex-col px-20 mt-16 w-full">
+    <div class="overflow-x-auto w-full mt-1">
+        <div class="flex justify-between mb-4">
+            <h3 class="text-md mb-2">All users</h3>
+            <a asp-action="Register" asp-controller="Account" class="btn">Add users</a>
+        </div>
+        <table class="table table-zebra w-full">
+            <!-- head -->
+            <thead class="bg-gray-500">
+            <tr class="bg-gray-500">
+                <th>Manager Name</th>
+                <th>Email</th>
+                <th>Delete user</th>
+            </tr>
+            </thead>
+            <tbody>
+                
+            @if (ViewBag.users is not null)
+            {
+                @foreach (var user in ViewBag.users)
+                {
+                    <tr>
+                        <th>@user.Name</th>
+                        <td>@user.UserName</td>
+                        <td><a href="@Url.Action("DeleteUser", "Account", new{id = user.Id})" class="btn btn-sm border-0 bg-red-600 text-red-200">Delete user</a></td>
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

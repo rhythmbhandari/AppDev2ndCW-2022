@@ -24,9 +24,28 @@
                     <li><a asp-action="AllDvds" asp-controller="DVD">DVDs</a></li>
                 </ul>
             </div>
-            <div class="navbar-end">
-                <a class="btn border-0">Logout</a>
-            </div>
+            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <div class="navbar-end flex gap-4 items-center">
+                    <a asp-action="AdminPanel" asp-controller="Account" class="text-md text-gray-400">Admin Panel</a>
+                    <a asp-action="Logout" asp-controller="Account" class="btn border-0">Logout</a>
+                </div>
+
+            }
+            @if (User.Identity.IsAuthenticated && User.IsInRole("Manager"))
+            {
+                <div class="navbar-end flex gap-4 items-center">
+                    <a asp-action="ChangePassword" asp-controller="Account" class="text-md text-gray-400">Change password</a>
+                    <a asp-action="Logout" asp-controller="Account" class="btn border-0">Logout</a>
+                </div>
+
+            }
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <div class="navbar-end">
+                    <a asp-action="Login" asp-controller="Account" class="btn border-0">Login</a>
+                </div>
+            }
         </nav>
     </header>
 <main class="flex justify-center h-[45rem]">

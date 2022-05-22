@@ -17,6 +17,7 @@ public class DVDController : Controller
     }
     
     // Question number 4
+    [Authorize]
     public IActionResult AllDvds()
     {
         List<DvdListViewModel> dvdList = new List<DvdListViewModel>();
@@ -51,6 +52,7 @@ public class DVDController : Controller
     }
 
     //Question number 11
+    [Authorize]
     public IActionResult Loaned(DateTime? date)
     {
         if(date is not null)
@@ -97,6 +99,7 @@ public class DVDController : Controller
 
  
     //Question number 13
+    [Authorize]
     public IActionResult NotLoaned()
     {
         var context = (from l in dataBaseContext.Loan
@@ -115,9 +118,9 @@ public class DVDController : Controller
 
 
     /*Controller for actor add form*/
-    [Authorize]
     [Route("addActor")]
     [AcceptVerbs("Get", "Post")]
+    [Authorize]
     public IActionResult AddActor(Actor actor)
     {
         if (Request.Method == "POST")
@@ -131,6 +134,7 @@ public class DVDController : Controller
 
     //Question number 9
     [HttpPost]
+    [Authorize]
     public IActionResult AddDvd(DvdViewModel viewModel, List<long> castMembers)
     {
         var timeNow = TimeOnly.FromDateTime(DateTime.Now);
@@ -159,6 +163,7 @@ public class DVDController : Controller
     
     /*Controller for add DVD get*/
     [HttpGet]
+    [Authorize]
     public IActionResult AddDvd()
     {
         ViewBag.actors = dataBaseContext.Actor.ToArray();
@@ -170,6 +175,7 @@ public class DVDController : Controller
     
     /*Controller for removing DVDs older than a year*/
     //Question number 10
+    [Authorize]
     public IActionResult RemoveDvds()
     {
         var dvds = (from dc in dataBaseContext.DvdCopy
@@ -183,7 +189,7 @@ public class DVDController : Controller
     }
     
     
-
+    [Authorize]
     public IActionResult RemoveDvdConfirmation()
     {
         var dvds = (from dc in dataBaseContext.DvdCopy
@@ -205,6 +211,7 @@ public class DVDController : Controller
 
     [Route("addStudio")]
     [AcceptVerbs("Get", "Post")]
+    [Authorize]
     public IActionResult AddStudio(Studio studio)
     {
         if (Request.Method == "POST")
@@ -217,6 +224,7 @@ public class DVDController : Controller
     }
     
     /*Controller for adding producers*/
+    [Authorize]
     [Route("addProducer")]
     [AcceptVerbs("Get", "Post")]
     public IActionResult AddProducer(Producer producer)
@@ -231,6 +239,7 @@ public class DVDController : Controller
     }
     
     /*Controller for adding categories*/
+    [Authorize]
     [Route("addCategory")]
     [AcceptVerbs("Get", "Post")]
     public IActionResult AddCategory(DvdCategory category)
@@ -245,6 +254,7 @@ public class DVDController : Controller
     }
     
     /*Controller for adding DVD copies*/
+    [Authorize]
     [HttpPost]
     public IActionResult AddDvdCopy(DvdCopy dvdCopy)
     {
@@ -254,6 +264,7 @@ public class DVDController : Controller
     }
 
     [HttpGet]
+    [Authorize]
     public IActionResult AddDvdCopy()
     {
         var dvdTitle = dataBaseContext.DvdTitle.ToArray();

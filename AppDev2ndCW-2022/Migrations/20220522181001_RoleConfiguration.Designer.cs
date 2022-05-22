@@ -4,6 +4,7 @@ using AppDev2ndCW_2022.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppDev2ndCW_2022.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220522181001_RoleConfiguration")]
+    partial class RoleConfiguration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -375,15 +377,15 @@ namespace AppDev2ndCW_2022.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cc58b243-d840-495f-b86a-4d297e75ad01",
-                            ConcurrencyStamp = "2cd21783-de87-4701-ba3e-fc93f2db4228",
+                            Id = "1755868f-53b8-4525-b097-99172abb1835",
+                            ConcurrencyStamp = "3d197ae9-0a94-43d6-8276-62fdc8ac3f87",
                             Name = "Manager",
-                            NormalizedName = "MANAGER"
+                            NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "c35bef2a-cdc9-4c96-ad37-3a0ce867b6ce",
-                            ConcurrencyStamp = "e293214f-d0d3-4645-bf78-e0eea8cbae4d",
+                            Id = "aa877c6a-1f53-48dd-bc8e-6cd249af222b",
+                            ConcurrencyStamp = "72265cd1-6419-49bf-8332-0a73d17c2213",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

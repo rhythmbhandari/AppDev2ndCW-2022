@@ -1,7 +1,7 @@
 using System.Reflection;
 using AppDev2ndCW_2022.Models;
-using AppDev2ndCW_2022.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,14 +9,18 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<UserService, UserService>();
 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
+//Old login code
+//builder.Services.AddScoped<UserService, UserService>();
+
+/*builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
     options =>
     {
         options.LoginPath = "/login:";
     }
-);
+);*/
+
+builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<DataBaseContext>();
 
 builder.Services.AddDbContext<DataBaseContext>(options =>
 {
@@ -25,6 +29,7 @@ builder.Services.AddDbContext<DataBaseContext>(options =>
         sqlOptions.MigrationsAssembly(typeof(Program).GetTypeInfo().Assembly.GetName().Name);
     });
 });
+
 
 var app = builder.Build();
 
@@ -48,8 +53,9 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
+app.UseAuthentication();
 
+app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
